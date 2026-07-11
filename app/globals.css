@@ -1,26 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0B0F14;
+  --s1: #111620;
+  --s2: #181E2A;
+  --s3: #1F2736;
+  --blue: #2563EB;
+  --blue-l: #3B74F5;
+  --blue-g: rgba(37,99,235,0.25);
+  --green: #00D68F;
+  --red: #FF3D57;
+  --amber: #F59E0B;
+  --t1: #F0F2F5;
+  --t2: #8892A0;
+  --t3: #3D4A5C;
+  --bd: rgba(230,232,237,0.08);
+  --bd2: rgba(230,232,237,0.14);
+  --px: max(2rem, calc((100vw - 1160px)/2));
+  --nav: 64px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="light"] {
+  --ink: #FAFAFA;
+  --s1: #F0F2F5;
+  --s2: #E6E8ED;
+  --s3: #D8DCE3;
+  --t1: #0B0F14;
+  --t2: #333A41;
+  --t3: #8892A0;
+  --bd: rgba(11,15,20,0.08);
+  --bd2: rgba(11,15,20,0.14);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ink);
+  color: var(--t1);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+@keyframes barsGrow {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); transform-origin: bottom; }
 }

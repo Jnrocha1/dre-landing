@@ -1,0 +1,14 @@
+<svg width="180" height="36" viewBox="0 0 180 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" x="0" y="2" fill="#0B0F14"/>
+  <path d="M8 8 L8 26 L16 26 C22 26 26 21 26 16 C26 11 22 8 16 8 Z" fill="white"/>
+  <path d="M8 8 L20 8 L20 13 L13 13 L13 21 L20 21 L20 26 L16 26 C22 26 26 21 26 16 C26 11 22 8 16 8 Z"
+    fill="url(#grad2)" opacity="0.7"/>
+  <defs>
+    <linearGradient id="grad2" x1="8" y1="8" x2="26" y2="26">
+      <stop offset="0%" stopColor="#E6E8ED"/>
+      <stop offset="100%" stopColor="#1E2533"/>
+    </linearGradient>
+  </defs>
+  <text x="40" y="22" fontFamily="Inter, sans-serif" fontSize="15" fontWeight="700" fill="#F0F2F5" letterSpacing="-0.5">DRE</text>
+  <text x="68" y="22" fontFamily="Inter, sans-serif" fontSize="15" fontWeight="300" fill="#F0F2F5">Analytics</text>
+</svg>
