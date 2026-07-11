@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 const STEPS = [
-  { id: "s1", icon: "📄", text: "Lendo o PDF...", done: "PDF lido — 31 linhas identificadas" },
-  { id: "s2", icon: "🤖", text: "IA identificando as linhas da DRE...", done: "IA mapeou todos os campos" },
-  { id: "s3", icon: "📊", text: "Calculando 23 indicadores financeiros...", done: "23 indicadores calculados" },
-  { id: "s4", icon: "💾", text: "Salvando no dashboard...", done: "Dashboard atualizado" },
+  { id: "s1", text: "Lendo o PDF...", done: "PDF lido — 31 linhas identificadas" },
+  { id: "s2", text: "IA identificando as linhas da DRE...", done: "IA mapeou todos os campos" },
+  { id: "s3", text: "Calculando 23 indicadores financeiros...", done: "23 indicadores calculados" },
+  { id: "s4", text: "Salvando no dashboard...", done: "Dashboard atualizado" },
 ]
 
 export default function UploadDemo() {

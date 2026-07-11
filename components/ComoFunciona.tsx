@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import { Check, ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 const STEPS = [
@@ -31,9 +32,9 @@ export default function ComoFunciona() {
             <h3 style={{ fontSize: 15, fontWeight: 700, color: "var(--t1)", marginBottom: "0.35rem" }}>{s.title}</h3>
             <p style={{ fontSize: 12, color: "var(--t2)", lineHeight: 1.6 }}>{s.desc}</p>
             <div style={{ marginTop: "0.8rem", fontSize: 10, fontWeight: 700, color: "var(--green)", display: "flex", alignItems: "center", gap: 5 }}>
-              ✓ {s.time}
+              <Check size={12} /> {s.time}
             </div>
-            {!isMobile && i < 2 && <div style={{ position: "absolute", top: "50%", right: "-1rem", transform: "translateY(-50%)", color: "var(--blue)", fontSize: 16 }}>→</div>}
+            {!isMobile && i < 2 && <div style={{ position: "absolute", top: "50%", right: "-1rem", transform: "translateY(-50%)", color: "var(--blue)", display: "flex" }}><ArrowRight size={16} /></div>}
           </motion.div>
         ))}
       </div>

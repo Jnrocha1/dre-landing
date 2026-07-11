@@ -1,6 +1,7 @@
 "use client"
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
+import { Check, Sparkles } from "lucide-react"
 
 type Tab = "Visão Geral" | "Custos e Margens" | "Alertas"
 const TABS: Tab[] = ["Visão Geral", "Custos e Margens", "Alertas"]
@@ -174,7 +175,7 @@ function CustosMargens({ p }: { p: number }) {
           Acima de 70%. Há espaço para negociação com fornecedores.
         </div>
         <div style={{padding:"10px 12px",background:"rgba(0,214,143,.08)",borderRadius:8,borderLeft:"2px solid var(--green)",fontSize:10,color:"#40ffa0"}}>
-          <strong style={{display:"block",marginBottom:2}}>✓ Margem em melhora consistente</strong>
+          <strong style={{display:"flex",alignItems:"center",gap:4,marginBottom:2}}><Check size={12} /> Margem em melhora consistente</strong>
           Evolução de +12pp em 5 meses. Tendência favorável.
         </div>
       </div>
@@ -220,7 +221,7 @@ function Alertas({ p }: { p: number }) {
       <div style={{background:"linear-gradient(135deg,rgba(37,99,235,0.08),rgba(0,214,143,0.04))",
         border:"1px solid rgba(37,99,235,0.2)",borderRadius:8,padding:12,
         opacity:fade(p,0.55,0.75),transition:"none"}}>
-        <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:6}}>✦ Resumo executivo por IA</div>
+        <div style={{display:"flex",alignItems:"center",gap:4,fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:6}}><Sparkles size={9} /> Resumo executivo por IA</div>
         <p style={{fontSize:10,color:"var(--t2)",lineHeight:1.75,borderLeft:"2px solid var(--blue)",paddingLeft:8}}>
           "O Grupo Alfa Comércio apresenta dois desafios estruturais: CMV médio de 84% nas unidades de atacado e cobertura de juros de 0,9× no consolidado. A Alfa Shopping é a única com tendência positiva consistente — subindo de 12% para 25% de margem em 5 meses. Recomendo priorizar a renegociação de fornecedores no atacado e revisão do mix de produtos das demais unidades."
         </p>

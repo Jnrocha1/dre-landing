@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 export default function Nav() {
@@ -66,10 +67,12 @@ export default function Nav() {
           )}
         </button>
         <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
-          padding: "10px 24px", borderRadius: 8, background: "var(--blue)", color: "#fff",
-          fontSize: 14, fontWeight: 700, textDecoration: "none",
+          display: "inline-flex", alignItems: "center", gap: 6,
+          padding: isMobile ? "8px 14px" : "10px 24px", borderRadius: 8, background: "var(--blue)", color: "#fff",
+          fontSize: isMobile ? 13 : 14, fontWeight: 700, textDecoration: "none",
+          whiteSpace: "nowrap",
           boxShadow: "0 4px 20px rgba(37,99,235,0.4)",
-        }}>Começar grátis →</a>
+        }}>Começar grátis <ArrowRight size={14} /></a>
       </div>
     </nav>
   )

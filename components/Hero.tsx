@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import { Check } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 export default function Hero() {
@@ -98,7 +99,7 @@ export default function Hero() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", fontSize: 12, color: "var(--t3)", flexWrap: "wrap" }}>
           {["Sem integração com ERP", "Sem configuração técnica", "Qualquer PDF de DRE"].map(t => (
             <span key={t} style={{ display: "flex", alignItems: "center", gap: 5 }}>
-              <span style={{ color: "var(--green)" }}>✓</span>{t}
+              <Check size={13} color="var(--green)" />{t}
             </span>
           ))}
         </div>

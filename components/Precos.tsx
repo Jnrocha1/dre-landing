@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import { Check, X } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 const PLANS = [
@@ -32,7 +33,7 @@ export default function Precos() {
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6, marginBottom: "1.1rem" }}>
               {p.feats.map(([label, ok]) => (
                 <div key={String(label)} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "var(--t2)" }}>
-                  <span style={{ color: ok ? "var(--green)" : "var(--t3)" }}>{ok ? "✓" : "✗"}</span>{label}
+                  {ok ? <Check size={14} color="var(--green)" /> : <X size={14} color="var(--t3)" />}{label}
                 </div>
               ))}
             </div>

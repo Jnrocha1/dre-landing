@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import { Star } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 const DEPS = [
@@ -24,7 +25,9 @@ export default function Depoimentos() {
           <motion.div key={d.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
             whileHover={{ y: -3, borderColor: "rgba(37,99,235,.22)" }}
             style={{ padding: "1.5rem", background: "var(--s1)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 13 }}>
-            <div style={{ color: "var(--amber)", fontSize: 13, marginBottom: "0.85rem", letterSpacing: 2 }}>★★★★★</div>
+            <div style={{ display: "flex", gap: 2, color: "var(--amber)", marginBottom: "0.85rem" }}>
+              {[1,2,3,4,5].map(n => <Star key={n} size={13} fill="var(--amber)" color="var(--amber)" />)}
+            </div>
             <p style={{ fontSize: 13, color: "var(--t2)", lineHeight: 1.7, marginBottom: "1rem", fontStyle: "italic" }}>
               <span style={{ color: "var(--blue)", fontSize: 22, fontStyle: "normal", lineHeight: 0, verticalAlign: -8, marginRight: 2 }}>"</span>
               {d.text}"
