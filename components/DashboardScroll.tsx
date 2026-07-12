@@ -273,47 +273,98 @@ export default function DashboardScroll() {
 
         {/* iPhone Mockup */}
         <div style={{ position: "relative", flexShrink: 0, order: isMobile ? 0 : 1 }}>
-          {/* Sombra de fundo */}
+          {/* Glow de fundo */}
           <div style={{
-            position: "absolute", inset: -20,
-            background: `radial-gradient(ellipse, ${phase === 0 ? "rgba(37,99,235,0.2)" : phase === 1 ? "rgba(0,214,143,0.15)" : "rgba(240,165,0,0.15)"} 0%, transparent 70%)`,
+            position: "absolute", inset: -30,
+            background: `radial-gradient(ellipse, ${
+              phase === 0 ? "rgba(37,99,235,0.25)" :
+              phase === 1 ? "rgba(0,214,143,0.18)" :
+              "rgba(240,165,0,0.18)"
+            } 0%, transparent 70%)`,
             transition: "background 0.8s ease",
             pointerEvents: "none",
           }} />
 
-          {/* Frame do iPhone */}
+          {/* Botões laterais esquerda (volume) */}
+          <div style={{
+            position: "absolute", left: -4, top: "22%",
+            display: "flex", flexDirection: "column", gap: 6,
+          }}>
+            {[phoneH * 0.07, phoneH * 0.07].map((h, i) => (
+              <div key={i} style={{
+                width: 3, height: h,
+                background: "linear-gradient(90deg, #2a2a2c, #3a3a3c)",
+                borderRadius: "2px 0 0 2px",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
+              }} />
+            ))}
+          </div>
+
+          {/* Botão silencioso esquerda */}
+          <div style={{
+            position: "absolute", left: -4, top: "14%",
+            width: 3, height: phoneH * 0.04,
+            background: "linear-gradient(90deg, #2a2a2c, #3a3a3c)",
+            borderRadius: "2px 0 0 2px",
+          }} />
+
+          {/* Botão power direita */}
+          <div style={{
+            position: "absolute", right: -4, top: "25%",
+            width: 3, height: phoneH * 0.1,
+            background: "linear-gradient(270deg, #2a2a2c, #3a3a3c)",
+            borderRadius: "0 2px 2px 0",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
+          }} />
+
+          {/* Frame principal */}
           <div style={{
             width: phoneW, height: phoneH,
-            borderRadius: phoneW * 0.12,
-            background: "linear-gradient(145deg, #2a2a3a, #1a1a28)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            padding: phoneW * 0.04,
-            boxShadow: "0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.1)",
+            borderRadius: phoneW * 0.14,
+            background: "linear-gradient(145deg, #3a3a3c, #2c2c2e, #1c1c1e)",
+            border: "1.5px solid rgba(255,255,255,0.18)",
+            padding: phoneW * 0.045,
+            boxShadow: "0 50px 100px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4)",
             position: "relative",
+            overflow: "hidden",
           }}>
-            {/* Notch */}
+            {/* Reflexo de luz no topo */}
             <div style={{
-              position: "absolute", top: phoneW * 0.04, left: "50%", transform: "translateX(-50%)",
-              width: phoneW * 0.3, height: phoneW * 0.06,
-              background: "#1a1a28", borderRadius: 99,
-              zIndex: 10,
+              position: "absolute", top: 0, left: 0, right: 0,
+              height: phoneW * 0.25,
+              background: "linear-gradient(180deg, rgba(255,255,255,0.07), transparent)",
+              pointerEvents: "none", zIndex: 10,
+              borderRadius: `${phoneW * 0.14}px ${phoneW * 0.14}px 0 0`,
+            }} />
+
+            {/* Dynamic Island */}
+            <div style={{
+              position: "absolute",
+              top: phoneW * 0.045,
+              left: "50%", transform: "translateX(-50%)",
+              width: phoneW * 0.28, height: phoneW * 0.065,
+              background: "#000", borderRadius: 99,
+              zIndex: 20,
+              boxShadow: "0 0 0 1px rgba(255,255,255,0.08)",
             }} />
 
             {/* Tela */}
             <div style={{
               width: "100%", height: "100%",
-              borderRadius: phoneW * 0.09,
+              borderRadius: phoneW * 0.11,
               overflow: "hidden",
               background: "#0B0F14",
             }}>
               <PhoneScreen phase={phase} progress={progress} />
             </div>
 
-            {/* Barra home */}
+            {/* Barra home indicator */}
             <div style={{
-              position: "absolute", bottom: phoneW * 0.03, left: "50%", transform: "translateX(-50%)",
-              width: phoneW * 0.35, height: 4,
-              background: "rgba(255,255,255,0.3)", borderRadius: 99,
+              position: "absolute", bottom: phoneW * 0.025,
+              left: "50%", transform: "translateX(-50%)",
+              width: phoneW * 0.32, height: 4,
+              background: "rgba(255,255,255,0.35)", borderRadius: 99,
+              zIndex: 20,
             }} />
           </div>
         </div>

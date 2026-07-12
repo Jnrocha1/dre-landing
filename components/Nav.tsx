@@ -1,13 +1,11 @@
 "use client"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const isMobile = useIsMobile()
-  const hideCta = useIsMobile(400)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60)
@@ -36,17 +34,20 @@ export default function Nav() {
           ))}
         </div>
       )}
-      {!hideCta && (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
-            display: "inline-flex", alignItems: "center", gap: 6,
-            padding: isMobile ? "8px 14px" : "10px 24px", borderRadius: 8, background: "var(--blue)", color: "#fff",
-            fontSize: isMobile ? 13 : 14, fontWeight: 700, textDecoration: "none",
-            whiteSpace: "nowrap",
-            boxShadow: "0 4px 20px rgba(37,99,235,0.4)",
-          }}>Começar grátis <ArrowRight size={14} /></a>
-        </div>
-      )}
+      <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
+        padding: isMobile ? "8px 14px" : "10px 24px",
+        borderRadius: 8,
+        background: "var(--blue)",
+        color: "#fff",
+        fontSize: isMobile ? 12 : 14,
+        fontWeight: 700,
+        textDecoration: "none",
+        whiteSpace: "nowrap",
+        boxShadow: "0 4px 20px rgba(37,99,235,0.4)",
+        flexShrink: 0,
+      }}>
+        {isMobile ? "Começar →" : "Começar grátis →"}
+      </a>
     </nav>
   )
 }
