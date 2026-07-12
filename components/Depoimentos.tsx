@@ -12,12 +12,12 @@ const DEPS = [
 export default function Depoimentos() {
   const isMobile = useIsMobile()
   return (
-    <section style={{ padding: "80px max(2rem, calc((100vw - 1160px)/2))" }}>
+    <section style={{ padding: "clamp(40px, 8vw, 80px) var(--px)" }}>
       <div style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 10, fontWeight: 700, color: "var(--blue-l, #5e78ff)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>
         <span style={{ width: 16, height: 2, background: "var(--blue)", borderRadius: 1, display: "inline-block" }} />
         Depoimentos
       </div>
-      <h2 style={{ fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "2.5rem" }}>
+      <h2 style={{ fontWeight: 800, fontSize: "clamp(1.8rem, 7vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "2.5rem" }}>
         Contadores que<br /><span style={{ color: "var(--green)" }}>já mudaram</span>
       </h2>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "1.25rem" }}>

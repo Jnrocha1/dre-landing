@@ -12,17 +12,17 @@ const ITEMS = [
 export default function Problema() {
   const isMobile = useIsMobile()
   return (
-    <section style={{ padding: "80px max(2rem, calc((100vw - 1160px)/2))", background: "var(--s1)" }}>
+    <section style={{ padding: "clamp(40px, 8vw, 80px) var(--px)", background: "var(--s1)" }}>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "3rem", alignItems: "center" }}>
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 10, fontWeight: 700, color: "var(--blue-l, #5e78ff)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>
             <span style={{ width: 16, height: 2, background: "var(--blue)", borderRadius: 1, display: "inline-block" }} />
             O problema de todo contador
           </div>
-          <h2 style={{ fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
+          <h2 style={{ fontWeight: 800, fontSize: "clamp(1.8rem, 7vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
             DRE virou PDF.<br />Você virou <span style={{ color: "var(--red)" }}>Excel.</span>
           </h2>
-          <p style={{ fontSize: "0.92rem", color: "var(--t2)", maxWidth: 460, lineHeight: 1.7, marginBottom: "1.5rem" }}>
+          <p style={{ fontSize: "0.92rem", color: "var(--t2)", maxWidth: "min(460px, 100%)", lineHeight: 1.7, marginBottom: "1.5rem" }}>
             Todo mês o mesmo ritual manual. Horas de digitação que não são contabilidade consultiva.
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>

@@ -13,19 +13,19 @@ const PLANS = [
 export default function Precos() {
   const isMobile = useIsMobile()
   return (
-    <section id="planos" style={{ padding: "80px max(2rem, calc((100vw - 1160px)/2))", background: "var(--s1)" }}>
+    <section id="planos" style={{ padding: "clamp(40px, 8vw, 80px) var(--px)", background: "var(--s1)" }}>
       <div style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 10, fontWeight: 700, color: "var(--blue-l, #5e78ff)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>
         <span style={{ width: 16, height: 2, background: "var(--blue)", borderRadius: 1, display: "inline-block" }} />
         Planos e preços
       </div>
-      <h2 style={{ fontWeight: 800, fontSize: "clamp(2rem, 4.5vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "0.75rem" }}>
+      <h2 style={{ fontWeight: 800, fontSize: "clamp(1.8rem, 7vw, 4rem)", lineHeight: 0.96, letterSpacing: "-0.03em", marginBottom: "0.75rem" }}>
         Simples.<br /><span style={{ color: "var(--blue)" }}>Sem surpresas.</span>
       </h2>
       <p style={{ color: "var(--t2)", marginBottom: "2.5rem", fontSize: "0.95rem" }}>Cancele quando quiser. Sem fidelidade. Sem taxa de implantação.</p>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4,1fr)", gap: "1.25rem" }}>
         {PLANS.map((p, i) => (
           <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-            style={{ padding: "1.65rem", background: p.popular ? "linear-gradient(180deg,rgba(37,99,235,.08),var(--s1))" : "var(--ink)", border: `1px solid ${p.popular ? "var(--blue)" : "rgba(255,255,255,0.06)"}`, borderRadius: 13, display: "flex", flexDirection: "column", position: "relative", boxShadow: p.popular ? "0 0 30px rgba(37,99,235,.12)" : "none" }}>
+            style={{ padding: "1.65rem", maxWidth: isMobile ? "min(380px, 92vw)" : "none", margin: isMobile ? "0 auto" : 0, width: "100%", background: p.popular ? "linear-gradient(180deg,rgba(37,99,235,.08),var(--s1))" : "var(--ink)", border: `1px solid ${p.popular ? "var(--blue)" : "rgba(255,255,255,0.06)"}`, borderRadius: 13, display: "flex", flexDirection: "column", position: "relative", boxShadow: p.popular ? "0 0 30px rgba(37,99,235,.12)" : "none" }}>
             {p.popular && <div style={{ position: "absolute", top: -1, left: "50%", transform: "translateX(-50%)", background: "var(--blue)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 12px", borderRadius: "0 0 7px 7px", letterSpacing: "0.04em", textTransform: "uppercase" }}>Mais popular</div>}
             <div style={{ fontSize: 10, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.35rem" }}>{p.name}</div>
             <div style={{ fontWeight: 800, fontSize: "2.6rem", color: "var(--t1)", lineHeight: 1 }}>{p.price}</div>

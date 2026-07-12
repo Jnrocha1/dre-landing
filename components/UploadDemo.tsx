@@ -39,7 +39,7 @@ export default function UploadDemo() {
   const isRunning = state === "running"
 
   return (
-    <div style={{ padding: "0 max(2rem, calc((100vw - 1160px)/2)) 80px", textAlign: "center" }}>
+    <div style={{ padding: "0 clamp(0px, 4vw, 80px) 80px", textAlign: "center" }}>
       <p style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: "1.5rem" }}>
         Simulação ao vivo
       </p>
@@ -70,7 +70,7 @@ export default function UploadDemo() {
         onClick={start}
         whileHover={{ y: -3, boxShadow: "0 20px 50px rgba(37,99,235,0.18)" }}
         style={{
-          maxWidth: 540, margin: "0 auto",
+          maxWidth: "min(540px, 92vw)", margin: "0 auto",
           background: isDone ? "rgba(0,214,143,0.04)" : isRunning ? "rgba(37,99,235,0.04)" : "var(--s1)",
           border: `2px ${isRunning || isDone ? "solid" : "dashed"} ${isDone ? "var(--green)" : isRunning ? "var(--blue)" : "rgba(255,255,255,0.12)"}`,
           borderRadius: 20, padding: "2.25rem", cursor: "pointer",

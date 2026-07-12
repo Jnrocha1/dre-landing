@@ -17,8 +17,12 @@
   --t3: #3D4A5C;
   --bd: rgba(230,232,237,0.08);
   --bd2: rgba(230,232,237,0.14);
-  --px: max(2rem, calc((100vw - 1160px)/2));
+  --px: max(1rem, calc((100vw - 1160px)/2));
   --nav: 64px;
+}
+
+@media (max-width: 767px) {
+  :root { --nav: 56px; }
 }
 
 [data-theme="light"] {
@@ -33,7 +37,8 @@
   --bd2: rgba(11,15,20,0.14);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
+img { max-width: 100%; height: auto; }
 html { scroll-behavior: smooth; }
 body {
   background: var(--ink);

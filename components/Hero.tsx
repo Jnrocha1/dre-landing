@@ -9,9 +9,9 @@ export default function Hero() {
     <section style={{
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
-      paddingTop: "calc(var(--nav) + 40px)",
-      paddingLeft: "max(2rem, calc((100vw - 1160px)/2))",
-      paddingRight: "max(2rem, calc((100vw - 1160px)/2))",
+      paddingTop: "clamp(80px, 15vw, 140px)",
+      paddingLeft: "var(--px)",
+      paddingRight: "var(--px)",
       paddingBottom: 60,
       position: "relative", overflow: "hidden", textAlign: "center",
     }}>
@@ -51,7 +51,7 @@ export default function Hero() {
 
         <h1 style={{
           fontWeight: 800,
-          fontSize: "clamp(2.2rem, 9vw, 7rem)",
+          fontSize: "clamp(1.9rem, 8vw, 7rem)",
           lineHeight: 0.93, letterSpacing: "-0.03em",
           marginBottom: "1.5rem",
         }}>
@@ -63,21 +63,22 @@ export default function Hero() {
         </h1>
 
         <p style={{
-          fontSize: "clamp(1rem, 1.8vw, 1.2rem)", color: "var(--t2)",
-          maxWidth: 520, margin: "0 auto 2.5rem", lineHeight: 1.75,
+          fontSize: "clamp(0.9rem, 3vw, 1.2rem)", color: "var(--t2)",
+          maxWidth: "min(520px, 92vw)", margin: "0 auto 2.5rem", lineHeight: 1.75,
         }}>
           Arraste o PDF da DRE. A IA extrai os dados, calcula 23 indicadores
           e gera o dashboard completo — antes do cliente terminar de perguntar.
         </p>
 
-        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "center", justifyContent: "center", gap: "1rem", flexWrap: "wrap", marginBottom: "2rem" }}>
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "center", justifyContent: "center", gap: isMobile ? "10px" : "1rem", flexWrap: "wrap", marginBottom: "2rem" }}>
           <motion.a
             href="https://dre-analytics-app.vercel.app/cadastro"
             whileHover={{ scale: 1.03, y: -2 }}
             style={{
               padding: "15px 34px", borderRadius: 10, background: "var(--blue)", color: "#fff",
               fontSize: 15, fontWeight: 700, textDecoration: "none",
-              display: "inline-flex", alignItems: "center", gap: 7,
+              display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 7,
+              width: isMobile ? "100%" : undefined,
               boxShadow: "0 8px 28px rgba(37,99,235,0.35)",
             }}
           >
@@ -90,13 +91,15 @@ export default function Hero() {
               padding: "15px 26px", borderRadius: 10,
               background: "transparent", border: "1px solid rgba(255,255,255,0.12)",
               color: "var(--t2)", fontSize: 15, fontWeight: 500, textDecoration: "none",
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              width: isMobile ? "100%" : undefined,
             }}
           >
             Ver como funciona
           </motion.a>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", fontSize: 12, color: "var(--t3)", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", fontSize: "clamp(11px, 2.5vw, 13px)", color: "var(--t3)", flexWrap: "wrap" }}>
           {["Sem integração com ERP", "Sem configuração técnica", "Qualquer PDF de DRE"].map(t => (
             <span key={t} style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <Check size={13} color="var(--green)" />{t}

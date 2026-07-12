@@ -40,7 +40,7 @@ function fade(p:number, start:number, end:number) {
   return Math.max(0, Math.min(1, (p - start) / (end - start)))
 }
 
-function VisaoGeral({ p }: { p: number }) {
+function VisaoGeral({ p, isMobile }: { p: number; isMobile: boolean }) {
   const kpi = fade(p,0,0.2)
   const bar = fade(p,0.18,0.38)
   const line = fade(p,0.32,0.52)
@@ -48,17 +48,17 @@ function VisaoGeral({ p }: { p: number }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"0.6rem",overflow:"hidden"}}>
       {/* KPIs */}
-      <div style={{opacity:kpi,transform:`translateY(${(1-kpi)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:5}}>
+      <div style={{opacity:kpi,transform:`translateY(${(1-kpi)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:isMobile?"repeat(2,1fr)":"repeat(5,1fr)",gap:5}}>
         {KPIS.map(k=>(
           <div key={k.label} style={{background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:"8px 10px"}}>
-            <div style={{fontSize:7,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:4}}>{k.label}</div>
+            <div style={{fontSize:isMobile?9:7,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:4}}>{k.label}</div>
             <div style={{fontSize:13,fontWeight:700,color:"var(--t1)",marginBottom:2}}>{k.value}</div>
             <div style={{fontSize:8,color:k.dc}}>{k.delta}</div>
           </div>
         ))}
       </div>
       {/* Charts */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+      <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:5}}>
         <div style={{opacity:bar,transform:`translateY(${(1-bar)*14}px)`,transition:"none",background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:10}}>
           <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:8}}>Receita vs resultado mensal</div>
           <div style={{display:"flex",alignItems:"flex-end",gap:3,height:55}}>
@@ -87,26 +87,28 @@ function VisaoGeral({ p }: { p: number }) {
           </svg>
         </div>
       </div>
-      {/* Heatmap */}
-      <div style={{opacity:hm,transform:`translateY(${(1-hm)*14}px)`,transition:"none",background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:10}}>
-        <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:6}}>Heatmap — Margem bruta por empresa/mês</div>
-        <div style={{display:"grid",gridTemplateColumns:"65px repeat(5,1fr)",gap:2}}>
-          <div />{["Jan","Fev","Mar","Abr","Mai"].map(m=><div key={m} style={{fontSize:7,color:"var(--t3)",textAlign:"center",padding:2}}>{m}</div>)}
-          {HEATMAP.map(row=>[
-            <div key={row.name+"l"} style={{fontSize:8,color:"var(--t3)",display:"flex",alignItems:"center",padding:2}}>{row.name}</div>,
-            ...row.vals.map((v,i)=>(
-              <div key={row.name+i} style={{padding:3,borderRadius:3,textAlign:"center",fontWeight:700,fontSize:7.5,
-                background:HC[row.types[i]],color:HT[row.types[i]],
-                opacity:hm,transition:`opacity 0.4s ease ${i*0.06+0.2}s`}}>{v}</div>
-            ))
-          ])}
+      {/* Heatmap — escondido em mobile (pequeno demais para ler) */}
+      {!isMobile && (
+        <div style={{opacity:hm,transform:`translateY(${(1-hm)*14}px)`,transition:"none",background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:10}}>
+          <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:6}}>Heatmap — Margem bruta por empresa/mês</div>
+          <div style={{display:"grid",gridTemplateColumns:"65px repeat(5,1fr)",gap:2}}>
+            <div />{["Jan","Fev","Mar","Abr","Mai"].map(m=><div key={m} style={{fontSize:7,color:"var(--t3)",textAlign:"center",padding:2}}>{m}</div>)}
+            {HEATMAP.map(row=>[
+              <div key={row.name+"l"} style={{fontSize:8,color:"var(--t3)",display:"flex",alignItems:"center",padding:2}}>{row.name}</div>,
+              ...row.vals.map((v,i)=>(
+                <div key={row.name+i} style={{padding:3,borderRadius:3,textAlign:"center",fontWeight:700,fontSize:7.5,
+                  background:HC[row.types[i]],color:HT[row.types[i]],
+                  opacity:hm,transition:`opacity 0.4s ease ${i*0.06+0.2}s`}}>{v}</div>
+              ))
+            ])}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
 
-function CustosMargens({ p }: { p: number }) {
+function CustosMargens({ p, isMobile }: { p: number; isMobile: boolean }) {
   const t1 = fade(p,0,0.25)
   const t2 = fade(p,0.22,0.47)
   const t3 = fade(p,0.44,0.69)
@@ -117,7 +119,7 @@ function CustosMargens({ p }: { p: number }) {
         <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:8}}>Análise de custos e margens — Jan a Mai 2026</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr repeat(5,70px)",gap:2,fontSize:8}}>
           {["Linha","Jan","Fev","Mar","Abr","Mai"].map(h=>(
-            <div key={h} style={{color:"var(--t3)",padding:"3px 6px",fontWeight:700,textTransform:"uppercase",fontSize:7}}>{h}</div>
+            <div key={h} style={{color:"var(--t3)",padding:"3px 6px",fontWeight:700,textTransform:"uppercase",fontSize:isMobile?9:7}}>{h}</div>
           ))}
           {[
             {label:"Receita Bruta",vals:["R$5,1M","R$6,2M","R$5,8M","R$5,6M","R$5,7M"],c:"var(--t1)",bold:true},
@@ -135,7 +137,7 @@ function CustosMargens({ p }: { p: number }) {
         </div>
       </div>
       {/* Gráficos */}
-      <div style={{opacity:t2,transform:`translateY(${(1-t2)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+      <div style={{opacity:t2,transform:`translateY(${(1-t2)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:5}}>
         <div style={{background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:10}}>
           <div style={{fontSize:8,color:"var(--t3)",textTransform:"uppercase",letterSpacing:"0.05em",marginBottom:8}}>CMV vs Receita — evolução</div>
           <div style={{display:"flex",alignItems:"flex-end",gap:4,height:55}}>
@@ -145,7 +147,7 @@ function CustosMargens({ p }: { p: number }) {
                   <div style={{width:"100%",height:`${h}%`,background:"rgba(255,61,87,0.55)",borderRadius:"2px 2px 0 0",
                     transform:`scaleY(${t2})`,transformOrigin:"bottom",transition:`transform 0.5s ease ${i*0.07}s`}} />
                 </div>
-                <div style={{fontSize:7,color:"var(--t3)",marginTop:2}}>{["Jan","Fev","Mar","Abr","Mai"][i]}</div>
+                <div style={{fontSize:isMobile?9:7,color:"var(--t3)",marginTop:2}}>{["Jan","Fev","Mar","Abr","Mai"][i]}</div>
               </div>
             ))}
           </div>
@@ -169,7 +171,7 @@ function CustosMargens({ p }: { p: number }) {
         </div>
       </div>
       {/* Alertas de custos */}
-      <div style={{opacity:t3,transform:`translateY(${(1-t3)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+      <div style={{opacity:t3,transform:`translateY(${(1-t3)*14}px)`,transition:"none",display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:5}}>
         <div style={{padding:"10px 12px",background:"rgba(240,165,0,.08)",borderRadius:8,borderLeft:"2px solid var(--amber)",fontSize:10,color:"#ffca6a"}}>
           <strong style={{display:"block",marginBottom:2}}>CMV médio: 74% da Rec. Líquida</strong>
           Acima de 70%. Há espaço para negociação com fornecedores.
@@ -183,10 +185,10 @@ function CustosMargens({ p }: { p: number }) {
   )
 }
 
-function Alertas({ p }: { p: number }) {
+function Alertas({ p, isMobile }: { p: number; isMobile: boolean }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"0.6rem"}}>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5}}>
+      <div style={{display:"grid",gridTemplateColumns:isMobile?"1fr":"1fr 1fr",gap:5}}>
         <div style={{background:"var(--s2)",border:"1px solid var(--bd)",borderRadius:8,padding:12,display:"flex",alignItems:"center",gap:12,
           opacity:fade(p,0,0.2),transition:"none"}}>
           <div style={{width:52,height:52,borderRadius:"50%",border:"3px solid var(--amber)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,fontWeight:700,color:"var(--amber)",flexShrink:0}}>34</div>
@@ -267,19 +269,19 @@ export default function DashboardScroll() {
   const sidebarItems = ["Consolidado","Alfa Matriz","Alfa Shopping","Alfa Norte","Alfa Sul","Alfa Atacado","Alfa Online","Alfa Prime"]
 
   return (
-    <div ref={containerRef} style={{ height: "280vh", position: "relative" }}>
+    <div ref={containerRef} style={{ height: isMobile ? "220vh" : "280vh", position: "relative" }}>
       <div style={{
-        position: "sticky", top: 64,
-        height: "calc(100vh - 64px)",
+        position: "sticky", top: "var(--nav)",
+        height: "calc(100vh - var(--nav))",
         display: "flex", alignItems: "center",
-        padding: `0.75rem ${isMobile ? "1rem" : "max(1rem, calc((100vw - 1160px)/2))"}`,
+        padding: `0.75rem ${isMobile ? "1rem" : "var(--px)"}`,
         overflow: "hidden",
       }}>
         <div style={{
           width: "100%", height: "100%",
           background: "var(--s1)",
           border: "1px solid var(--bd2)",
-          borderRadius: isMobile ? 14 : 20,
+          borderRadius: isMobile ? 12 : 20,
           overflow: "hidden",
           boxShadow: "0 32px 80px rgba(0,0,0,0.7)",
           display: "flex", flexDirection: "column",
@@ -332,7 +334,7 @@ export default function DashboardScroll() {
             )}
 
             {/* Conteúdo */}
-            <div style={{padding:isMobile?"0.6rem":"0.75rem",overflowY:"auto",overflowX:"hidden"}}>
+            <div style={{padding:isMobile?"0.5rem":"0.75rem",overflowY:"auto",overflowX:"hidden"}}>
               <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8,marginBottom:"0.6rem",flexWrap:"wrap"}}>
                 <div>
                   <div style={{fontSize:isMobile?11:12,fontWeight:700,color:"var(--t1)"}}>Grupo Alfa Comércio — {activeTab}</div>
@@ -344,9 +346,9 @@ export default function DashboardScroll() {
                 </div>
               </div>
 
-              {activeTab === "Visão Geral" && <VisaoGeral p={tabProgress} />}
-              {activeTab === "Custos e Margens" && <CustosMargens p={tabProgress} />}
-              {activeTab === "Alertas" && <Alertas p={tabProgress} />}
+              {activeTab === "Visão Geral" && <VisaoGeral p={tabProgress} isMobile={isMobile} />}
+              {activeTab === "Custos e Margens" && <CustosMargens p={tabProgress} isMobile={isMobile} />}
+              {activeTab === "Alertas" && <Alertas p={tabProgress} isMobile={isMobile} />}
             </div>
           </div>
         </div>
