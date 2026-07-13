@@ -31,7 +31,7 @@ export default function TrustStrip() {
         .trust-track {
           display: flex;
           gap: 0;
-          animation: strip-scroll 30s linear infinite;
+          animation: strip-scroll 18s linear infinite;
           width: max-content;
         }
         .trust-track:hover { animation-play-state: paused; }
