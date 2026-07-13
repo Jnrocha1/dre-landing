@@ -1,12 +1,12 @@
 import Nav from "@/components/Nav"
 import Hero from "@/components/Hero"
-import UploadDemo from "@/components/UploadDemo"
-import DashboardScroll from "@/components/DashboardScroll"
-import Problema from "@/components/Problema"
+import TrustStrip from "@/components/TrustStrip"
+import ProductShowcase from "@/components/ProductShowcase"
 import ComoFunciona from "@/components/ComoFunciona"
 import Recursos from "@/components/Recursos"
 import Depoimentos from "@/components/Depoimentos"
 import Precos from "@/components/Precos"
+import FAQ from "@/components/FAQ"
 import CtaFinal from "@/components/CtaFinal"
 import Footer from "@/components/Footer"
 
@@ -15,13 +15,13 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
-      <UploadDemo />
-      <DashboardScroll />
-      <Problema />
+      <TrustStrip />
+      <ProductShowcase />
       <ComoFunciona />
       <Recursos />
       <Depoimentos />
       <Precos />
+      <FAQ />
       <CtaFinal />
       <Footer />
     </main>
