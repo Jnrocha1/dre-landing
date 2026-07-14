@@ -138,6 +138,10 @@ export default function NotebookMockup({
             objectFit: "cover",
             transform: matrix,
             transformOrigin: "0 0",
+            // border-radius no espaço local (antes do warp) é carregado proporcionalmente
+            // pela matrix3d — arredonda os 4 cantos do vídeo pra bater com o bisel curvo
+            // da tela na imagem do notebook.
+            borderRadius: "3%",
             zIndex: 2,
             pointerEvents: "none",
           }}
@@ -153,6 +157,7 @@ export default function NotebookMockup({
           width: size.w, height: size.h,
           transform: matrix,
           transformOrigin: "0 0",
+          borderRadius: "3%",
           zIndex: 3,
           pointerEvents: "none",
           background: "linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.03) 52%, transparent 65%), linear-gradient(180deg, rgba(255,255,255,0.16) 0%, transparent 3%)",

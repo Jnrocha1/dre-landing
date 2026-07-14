@@ -25,18 +25,26 @@ export default function Hero() {
       }} />
 
       {/* NOTEBOOK — no desktop é camada de fundo (absolute, deslocado à direita, sangrando
-          pra fora da viewport); no mobile fica no fluxo normal, abaixo do texto, mas
-          bem maior que o próprio viewport (sangra simétrico nas laterais via alignItems:center
-          do container pai — overflowX:hidden na section corta o excesso nas bordas). */}
+          pra fora da viewport); no mobile vira uma "janela" de altura limitada (maxHeight
+          em vh + overflow:hidden) com o notebook ampliado bem além dela — a tela (que ocupa
+          só os ~65% de cima da imagem) fica de fora do corte, e o que sobra (base/teclado)
+          é o que é cortado. width:100vw + marginLeft de breakout ignora o padding da
+          section, senão a sangria lateral ficaria presa ao content-box em vez da viewport. */}
       <div style={{
         position: isMobile ? "relative" : "absolute",
         top: isMobile ? undefined : "50%",
         right: isMobile ? undefined : "-9vw",
         transform: isMobile ? undefined : "translateY(-50%)",
-        width: isMobile ? "155vw" : "80vw",
+        width: isMobile ? "100vw" : "80vw",
+        marginLeft: isMobile ? "calc(50% - 50vw)" : undefined,
         // reset global `* { max-width:100% }` (globals.css), que senão prende a
         // largura ao content-box do flex item e mata a sangria lateral no mobile.
         maxWidth: isMobile ? "none" : undefined,
+        maxHeight: isMobile ? "58vh" : undefined,
+        overflow: isMobile ? "hidden" : undefined,
+        display: isMobile ? "flex" : undefined,
+        justifyContent: isMobile ? "center" : undefined,
+        alignItems: isMobile ? "flex-start" : undefined,
         marginTop: isMobile ? "0.5rem" : undefined,
         order: 2,
         zIndex: 1,
@@ -49,7 +57,7 @@ export default function Hero() {
             position: "absolute",
             top: "50%", left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "90%", height: "70%",
+            width: "90%", height: "90%",
             background: "radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, transparent 70%)",
             filter: "blur(20px)",
             zIndex: -1,
@@ -59,6 +67,11 @@ export default function Hero() {
           initial={isMobile ? { opacity: 0, x: 0, y: 40 } : { opacity: 0, x: 60, y: 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: isMobile ? 1.1 : 1.3, delay: isMobile ? 0.5 : 0.4, ease: [0.22,1,0.36,1] }}
+          style={{
+            width: isMobile ? "230vw" : undefined,
+            maxWidth: isMobile ? "none" : undefined,
+            flexShrink: isMobile ? 0 : undefined,
+          }}
         >
           <NotebookMockup />
         </motion.div>
