@@ -33,15 +33,28 @@ export default function Hero() {
         top: isMobile ? undefined : "50%",
         right: isMobile ? undefined : "-9vw",
         transform: isMobile ? undefined : "translateY(-50%)",
-        width: isMobile ? "125vw" : "80vw",
+        width: isMobile ? "155vw" : "80vw",
         // reset global `* { max-width:100% }` (globals.css), que senão prende a
         // largura ao content-box do flex item e mata a sangria lateral no mobile.
         maxWidth: isMobile ? "none" : undefined,
-        marginTop: isMobile ? "2rem" : undefined,
+        marginTop: isMobile ? "0.5rem" : undefined,
         order: 2,
         zIndex: 1,
         pointerEvents: "none",
       }}>
+        {/* Glow ambiente atrás do notebook no mobile — só pra dar sensação de
+            profundidade/atmosfera, o notebook boiando sozinho no vazio ficava sem contexto. */}
+        {isMobile && (
+          <div style={{
+            position: "absolute",
+            top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "90%", height: "70%",
+            background: "radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, transparent 70%)",
+            filter: "blur(20px)",
+            zIndex: -1,
+          }} />
+        )}
         <motion.div
           initial={isMobile ? { opacity: 0, x: 0, y: 40 } : { opacity: 0, x: 60, y: 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}

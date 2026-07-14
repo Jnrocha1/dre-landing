@@ -6,10 +6,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react"
  * (% da largura/altura da imagem). Ajustar aqui se o asset do mockup mudar.
  */
 const SCREEN = {
-  tl: { x: 41.3, y: 15.3 },
-  tr: { x: 79.4, y: 11.5 },
-  br: { x: 77.0, y: 64.9 },
-  bl: { x: 36.2, y: 60.4 },
+  tl: { x: 41.56, y: 15.33 },
+  tr: { x: 79.99, y: 12.60 },
+  br: { x: 76.67, y: 64.97 },
+  bl: { x: 36.31, y: 61.04 },
 }
 
 interface Pt { x: number; y: number }
@@ -142,6 +142,22 @@ export default function NotebookMockup({
             pointerEvents: "none",
           }}
         />
+      )}
+
+      {/* Reflexo de vidro — mesma homografia do vídeo, então acompanha a mesma
+          perspectiva da tela. mixBlendMode:"screen" pra clarear sem lavar o vídeo. */}
+      {matrix && (
+        <div style={{
+          position: "absolute",
+          top: 0, left: 0,
+          width: size.w, height: size.h,
+          transform: matrix,
+          transformOrigin: "0 0",
+          zIndex: 3,
+          pointerEvents: "none",
+          background: "linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.03) 52%, transparent 65%), linear-gradient(180deg, rgba(255,255,255,0.16) 0%, transparent 3%)",
+          mixBlendMode: "screen",
+        }} />
       )}
     </div>
   )
