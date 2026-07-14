@@ -132,14 +132,15 @@ export default function Hero() {
         ))}
       </motion.div>
 
-      {/* NOTEBOOK MOCKUP — render 3D com vídeo real do dashboard */}
+      {/* NOTEBOOK MOCKUP — render 3D com vídeo real do dashboard, estilo Apple: solto no fundo, bastante espaço negativo ao redor */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5, ease: [0.22,1,0.36,1] }}
         style={{
           position: "relative", zIndex: 1,
-          width: "100%", maxWidth: isMobile ? 480 : 980,
+          width: "100%", maxWidth: isMobile ? 400 : 760,
+          marginTop: isMobile ? "2rem" : "3rem",
         }}
       >
         <NotebookMockup />

@@ -1,9 +1,8 @@
 "use client"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { useIsMobile } from "@/lib/use-is-mobile"
 
 /**
- * Cantos da tela calibrados visualmente contra public/notebook-mockup.jpg
+ * Cantos da tela calibrados visualmente contra public/notebook-mockup-cutout.png
  * (% da largura/altura da imagem). Ajustar aqui se o asset do mockup mudar.
  */
 const SCREEN = {
@@ -56,10 +55,9 @@ interface NotebookMockupProps {
 }
 
 export default function NotebookMockup({
-  imageSrc = "/notebook-mockup.jpg",
+  imageSrc = "/notebook-mockup-cutout.png",
   videoSrc = "/dashboard-demo.mp4",
 }: NotebookMockupProps) {
-  const isMobile = useIsMobile()
   const containerRef = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState({ w: 0, h: 0 })
 
@@ -105,6 +103,18 @@ export default function NotebookMockup({
         overflow: "visible",
       }}
     >
+      {/* Sombra de contato — discreta, só pra ancorar o notebook no espaço, sem "chão" nem brilho colorido */}
+      <div style={{
+        position: "absolute",
+        left: "50%", bottom: "6%",
+        transform: "translateX(-50%)",
+        width: "55%", height: "10%",
+        background: "radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 72%)",
+        filter: "blur(14px)",
+        zIndex: 0,
+        pointerEvents: "none",
+      }} />
+
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageSrc}
@@ -132,43 +142,6 @@ export default function NotebookMockup({
             pointerEvents: "none",
           }}
         />
-      )}
-
-      {/* Efeito de "vazamento" — sutil, só desktop. Uma segunda cópia do vídeo
-          ultrapassando a borda direita/inferior da tela, com fade e leve blur. */}
-      {matrix && !isMobile && (
-        <div
-          style={{
-            position: "absolute",
-            left: `${SCREEN.br.x - 6}%`,
-            top: `${SCREEN.tr.y + 6}%`,
-            width: "20%",
-            height: "46%",
-            overflow: "hidden",
-            maskImage: "linear-gradient(120deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, transparent 78%)",
-            WebkitMaskImage: "linear-gradient(120deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, transparent 78%)",
-            filter: "blur(0.6px)",
-            zIndex: 3,
-            pointerEvents: "none",
-            borderRadius: 4,
-          }}
-        >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            src={videoSrc}
-            style={{
-              position: "absolute",
-              left: "-35%",
-              top: "-8%",
-              width: "170%",
-              height: "170%",
-              objectFit: "cover",
-            }}
-          />
-        </div>
       )}
     </div>
   )
