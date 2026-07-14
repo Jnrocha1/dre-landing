@@ -7,11 +7,10 @@ export default function Hero() {
   const isMobile = useIsMobile()
 
   return (
-    <section style={{
-      minHeight: "100vh",
+    <section className="hero-min-h" style={{
       display: "flex", flexDirection: "column",
-      alignItems: "center", justifyContent: "center",
-      padding: `calc(var(--nav) + ${isMobile ? "3rem" : "4rem"}) var(--px) ${isMobile ? "3rem" : "5rem"}`,
+      alignItems: "center", justifyContent: isMobile ? "flex-start" : "center",
+      padding: `calc(var(--nav) + ${isMobile ? "2rem" : "4rem"}) var(--px) ${isMobile ? "3rem" : "5rem"}`,
       textAlign: "center",
       position: "relative",
       overflow: "hidden",

@@ -25,6 +25,13 @@
   :root { --nav: 56px; }
 }
 
+/* Altura da viewport que respeita a barra de endereço em navegadores mobile
+   (100vh fica maior que a área visível real até o usuário rolar) */
+.hero-min-h {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
 img { max-width: 100%; height: auto; }
 html { scroll-behavior: smooth; }
