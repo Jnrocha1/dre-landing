@@ -64,7 +64,7 @@ export default function ProductShowcase() {
         <div ref={tableRef}>
           <div style={{ marginBottom: "1.5rem" }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
-              01 — Extração automática
+              01. Extração automática
             </div>
             <div style={{ fontSize: isMobile ? 18 : 22, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--t1)", marginBottom: "0.5rem" }}>
               A DRE aparece estruturada
@@ -106,7 +106,7 @@ export default function ProductShowcase() {
         <div ref={kpiRef} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div style={{ marginBottom: "0.5rem" }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.5rem" }}>
-              02 — Dashboard completo
+              02. Dashboard completo
             </div>
             <div style={{ fontSize: isMobile ? 18 : 22, fontWeight: 700, letterSpacing: "-0.02em", color: "var(--t1)", marginBottom: "0.5rem" }}>
               23 indicadores calculados

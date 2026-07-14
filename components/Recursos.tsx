@@ -18,7 +18,7 @@ const FEATS = [
   { Icon: BarChart3, titulo: "Dashboard com 11 abas", desc: "Visão Geral, An. Vertical, Horizontal, Custos, Despesas, Resultado, Comparativo, Eficiência, Alertas, C-Level e Ranking." },
   { Icon: Target, titulo: "Score de saúde 0–100", desc: "6 critérios automáticos: CMV, resultado, margens, cobertura de juros, tendência e variação de receita.", badge: "Exclusivo" },
   { Icon: TrendingUp, titulo: "Projeção de tendência", desc: "Regressão linear projetando resultado para os próximos 3 meses com base no histórico da empresa." },
-  { Icon: AlertTriangle, titulo: "Alertas inteligentes", desc: "CMV fora do benchmark, cobertura de juros insuficiente, queda de receita — detectados e explicados." },
+  { Icon: AlertTriangle, titulo: "Alertas inteligentes", desc: "CMV fora do benchmark, cobertura de juros insuficiente, queda de receita: detectados e explicados." },
   { Icon: FileText, titulo: "Resumo executivo por IA", desc: "Texto em linguagem de negócios gerado automaticamente. O cliente entende sem ser contador.", badge: "Diferencial" },
   { Icon: Layers, titulo: "Consolidado de grupos", desc: "Análise consolidada de múltiplas empresas com heatmap de performance por unidade." },
 ]

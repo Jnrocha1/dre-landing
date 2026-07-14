@@ -4,8 +4,8 @@ import { useIsMobile } from "@/lib/use-is-mobile"
 import { Plus, Minus } from "lucide-react"
 
 const ITEMS = [
-  { q: "Funciona com qualquer sistema contábil?", a: "Sim. O DRE Analytics processa qualquer PDF de DRE, independente do sistema que gerou — Domínio, Alterdata, Questor, Contabilizei, ou qualquer outro. Se gera PDF, funciona." },
-  { q: "O cliente precisa ter acesso ao sistema?", a: "Não. O dashboard é do contador. Você apresenta para o cliente como quiser — compartilhando a tela, exportando PDF ou imprimindo. O cliente não precisa de login." },
+  { q: "Funciona com qualquer sistema contábil?", a: "Sim. O DRE Analytics processa qualquer PDF de DRE, independente do sistema que gerou: Domínio, Alterdata, Questor, Contabilizei ou qualquer outro. Se gera PDF, funciona." },
+  { q: "O cliente precisa ter acesso ao sistema?", a: "Não. O dashboard é do contador. Você apresenta para o cliente como quiser: compartilhando a tela, exportando PDF ou imprimindo. O cliente não precisa de login." },
   { q: "Quantas empresas posso cadastrar?", a: "Depende do plano. Trial: 1 empresa. Starter: até 5. Pro: até 15. Premium: até 30 com opção de adicionar mais." },
   { q: "Posso exportar os dados?", a: "Sim. O dashboard permite exportar em PDF os relatórios de análise. A funcionalidade de exportação de dados brutos (CSV) está disponível nos planos Pro e Premium." },
   { q: "Como funciona o período trial?", a: "Você pode processar 3 DREs gratuitamente, sem cartão de crédito. Sem prazo, sem cobrança automática. Só começa a pagar se decidir assinar." },
