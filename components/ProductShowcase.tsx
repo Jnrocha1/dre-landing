@@ -1,6 +1,6 @@
 "use client"
-import { useRef, useEffect, useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
+import { useInView } from "@/lib/use-in-view"
 
 const LINHAS = [
   { label: "Receita Bruta de Serviços", valor: 1648349, pct: "100,0%", indent: 0, bold: true, cor: "var(--t1)" },
@@ -19,17 +19,6 @@ function fmtBRL(v: number) {
   return v < 0 ? `(R$ ${abs})` : `R$ ${abs}`
 }
 
-function useInView() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [vis, setVis] = useState(false)
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.1 })
-    obs.observe(el); return () => obs.disconnect()
-  }, [])
-  return { ref, vis }
-}
-
 export default function ProductShowcase() {
   const isMobile = useIsMobile()
   const { ref: tableRef, vis: tableVis } = useInView()
@@ -40,10 +29,7 @@ export default function ProductShowcase() {
 
       {/* Título da seção */}
       <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>
-          O produto
-        </div>
-        <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "1rem" }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "1rem" }}>
           Do PDF ao dashboard.<br />
           <span style={{ color: "var(--t2)", fontWeight: 400 }}>Sem digitar nada.</span>
         </h2>

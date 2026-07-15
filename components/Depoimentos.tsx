@@ -35,8 +35,8 @@ export default function Depoimentos() {
   return (
     <section style={{ padding: "100px var(--px)", background: "var(--s1)", borderTop: "1px solid var(--bd)" }}>
       <div style={{ marginBottom: "3rem" }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>Depoimentos</div>
-        <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+        <div style={{ fontSize: 14, color: "var(--t2)", fontStyle: "italic", marginBottom: "0.75rem" }}>Direto de quem usa todo mês.</div>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
           Quem usa, não volta<br /><span style={{ color: "var(--t2)", fontWeight: 400 }}>para o Excel de antes.</span>
         </h2>
       </div>
@@ -105,6 +105,8 @@ export default function Depoimentos() {
             <ChevronRight size={16} />
           </button>
         </div>
+
+        <div style={{ fontSize: 11, color: "var(--t3)", marginTop: "1.5rem" }}>*Exemplos ilustrativos de casos de uso.</div>
       </div>
     </section>
   )

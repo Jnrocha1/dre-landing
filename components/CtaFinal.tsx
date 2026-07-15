@@ -5,10 +5,9 @@ export default function CtaFinal() {
   const isMobile = useIsMobile()
   return (
     <section style={{ padding: "120px var(--px)", background: "var(--ink)", borderTop: "1px solid var(--bd)", textAlign: "center" }}>
-      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1.5rem" }}>
-        Comece agora
-      </div>
+      <div style={{ width: 36, height: 3, borderRadius: 2, background: "var(--amber)", margin: "0 auto 1.5rem" }} />
       <h2 style={{
+        fontFamily: "var(--font-display)",
         fontSize: isMobile ? "clamp(1.8rem,8vw,3rem)" : "clamp(2.5rem,5vw,4.5rem)",
         fontWeight: 700, letterSpacing: "-0.035em", lineHeight: 1.05,
         marginBottom: "1.5rem", maxWidth: "16ch", margin: "0 auto 1.5rem",

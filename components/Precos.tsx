@@ -1,5 +1,6 @@
 "use client"
 import { useIsMobile } from "@/lib/use-is-mobile"
+import { useInView } from "@/lib/use-in-view"
 import { Check, X } from "lucide-react"
 
 const PLANS = [
@@ -23,23 +24,26 @@ const PLANS = [
 
 export default function Precos() {
   const isMobile = useIsMobile()
+  const { ref, vis } = useInView()
   return (
     <section id="planos" style={{ padding: "100px var(--px)", background: "var(--ink)", borderTop: "1px solid var(--bd)" }}>
       <div style={{ marginBottom: "3rem" }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>Planos</div>
-        <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-          Simples.<br /><span style={{ color: "var(--t2)", fontWeight: 400 }}>Sem surpresas.</span>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+          Quanto custa continuar<br /><span style={{ color: "var(--t2)", fontWeight: 400 }}>fazendo isso na mão?</span>
         </h2>
         <p style={{ fontSize: 14, color: "var(--t3)", marginTop: "1rem" }}>Cancele quando quiser · Sem fidelidade · Sem taxa de implantação</p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "1px", background: "var(--bd)", border: "1px solid var(--bd)", borderRadius: 12, overflow: "hidden" }}>
-        {PLANS.map(p => (
+      <div ref={ref} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "1px", background: "var(--bd)", border: "1px solid var(--bd)", borderRadius: 12, overflow: "hidden" }}>
+        {PLANS.map((p, i) => (
           <div key={p.name} style={{
             padding: "1.75rem",
             background: p.popular ? "var(--s2)" : "var(--s1)",
             display: "flex", flexDirection: "column",
             position: "relative",
+            opacity: vis ? 1 : 0,
+            transform: vis ? "none" : "translateY(16px)",
+            transition: `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`,
           }}>
             {p.popular && (
               <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", background: "var(--blue)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 12px", borderRadius: "0 0 6px 6px", letterSpacing: "0.04em", textTransform: "uppercase" }}>

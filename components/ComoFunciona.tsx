@@ -1,17 +1,6 @@
 "use client"
-import { useRef, useEffect, useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
-
-function useInView() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [vis, setVis] = useState(false)
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true) }, { threshold: 0.1 })
-    obs.observe(el); return () => obs.disconnect()
-  }, [])
-  return { ref, vis }
-}
+import { useInView } from "@/lib/use-in-view"
 
 const STEPS = [
   { n: "01", titulo: "Arraste o PDF", desc: "Upload da DRE em PDF. Qualquer formato, qualquer sistema contábil que gere PDF.", detalhe: "3 segundos" },
@@ -26,8 +15,7 @@ export default function ComoFunciona() {
   return (
     <section id="como-funciona" style={{ padding: "100px var(--px)", background: "var(--s1)", borderTop: "1px solid var(--bd)" }}>
       <div style={{ marginBottom: "4rem" }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>Como funciona</div>
-        <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
           Três passos.<br /><span style={{ color: "var(--t2)", fontWeight: 400 }}>Oito segundos.</span>
         </h2>
       </div>

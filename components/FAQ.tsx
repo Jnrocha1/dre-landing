@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
+import { useInView } from "@/lib/use-in-view"
 import { Plus, Minus } from "lucide-react"
 
 const ITEMS = [
@@ -15,14 +16,19 @@ const ITEMS = [
 export default function FAQ() {
   const isMobile = useIsMobile()
   const [open, setOpen] = useState<number | null>(null)
+  const { ref, vis } = useInView()
 
   return (
     <section id="faq" style={{ padding: "100px var(--px)", background: "var(--s1)", borderTop: "1px solid var(--bd)" }}>
-      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.6fr", gap: isMobile ? "3rem" : "6rem", alignItems: "start" }}>
+      <div ref={ref} style={{
+        display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.6fr", gap: isMobile ? "3rem" : "6rem", alignItems: "start",
+        opacity: vis ? 1 : 0,
+        transform: vis ? "none" : "translateY(16px)",
+        transition: "opacity 0.6s ease, transform 0.6s ease",
+      }}>
         <div>
-          <div style={{ fontSize: 11, fontWeight: 700, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "0.75rem" }}>FAQ</div>
-          <h2 style={{ fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-            Perguntas<br /><span style={{ color: "var(--t2)", fontWeight: 400 }}>frequentes.</span>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(2rem,4vw,3rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            Perguntas frequentes.
           </h2>
         </div>
 
