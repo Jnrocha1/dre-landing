@@ -73,7 +73,16 @@ export default function Hero() {
             flexShrink: isMobile ? 0 : undefined,
           }}
         >
-          <NotebookMockup />
+          {/* Wrapper estático separado do motion.div de propósito: framer-motion gera seu
+              próprio transform via `animate`, que colidiria com um transform estático no
+              mesmo elemento. A imagem do notebook tem uma margem vazia acima do objeto
+              antes da tela começar — desloca pra cima pra pular essa margem, senão o
+              maxHeight do crop corta a tela em vez do teclado. Ponto mais alto real da tela
+              é SCREEN.tr.y≈12.6% (NotebookMockup.tsx); usamos ~10% (2.6% de folga) pra
+              garantir que nem um pixel da tela seja cortado, mesmo com a margem de segurança. */}
+          <div style={{ transform: isMobile ? "translateY(-10%)" : undefined }}>
+            <NotebookMockup />
+          </div>
         </motion.div>
       </div>
 
