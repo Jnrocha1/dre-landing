@@ -125,6 +125,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22,1,0.36,1] }}
           style={{
+            fontFamily: "var(--font-display)",
             fontSize: isMobile ? "clamp(2.4rem, 11vw, 3.5rem)" : "clamp(3rem, 5.5vw, 5.5rem)",
             fontWeight: 700,
             letterSpacing: "-0.035em",
