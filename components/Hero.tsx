@@ -75,15 +75,22 @@ export default function Hero() {
         >
           {/* Wrapper estático separado do motion.div de propósito: framer-motion gera seu
               próprio transform via `animate`, que colidiria com um transform estático no
-              mesmo elemento. A imagem do notebook tem uma margem vazia acima do objeto
-              antes da tela começar — desloca pra cima pra pular essa margem, senão o
-              maxHeight do crop corta a tela em vez do teclado. Ponto mais alto real da tela
-              é SCREEN.tr.y≈12.6% (NotebookMockup.tsx). A primeira tentativa usou -10% (só
-              2,6% de folga — medido ao vivo em produção via devtools: sobravam ~13px de
-              margem antes do corte, insuficiente na prática, tela ainda cortava). Subindo
-              pra -20% dá ~7,4% de folga (~38px), com margem de sobra also no fundo (a base/
-              teclado ainda cabe tranquilamente dentro do maxHeight do crop). */}
-          <div style={{ transform: isMobile ? "translateY(-20%)" : undefined }}>
+              mesmo elemento.
+              HISTÓRICO DO BUG (medido ao vivo em produção via devtools, não em teoria):
+              as duas tentativas anteriores (-10% e depois -20%) partiam da premissa errada
+              de que precisávamos "pular" a margem vazia acima do notebook deslocando a
+              imagem pra cima. Na prática é o CONTRÁRIO: com o container em
+              alignItems:"flex-start" e SEM nenhum deslocamento, o topo da imagem já alinha
+              exatamente com o topo da janela de corte, e a tela (que só começa em
+              SCREEN.tr.y≈12.6% da altura da imagem) fica confortavelmente dentro da janela,
+              com boa margem — foi medido ~64px de folga no topo num viewport de 390px.
+              Deslocar pra cima (translateY negativo) empurra a tela PRA FORA da janela por
+              cima, cortando-a — e quanto maior o deslocamento, pior o corte (por isso
+              -20% cortava mais que -10%, e o usuário via "igual ou pior"). A correção é não
+              deslocar nada: o alinhamento flex-start sozinho já resolve, cortando só uma
+              fatia pequena do fundo/teclado (o suficiente pra caber no maxHeight do
+              container), nunca a tela. */}
+          <div>
             <NotebookMockup />
           </div>
         </motion.div>
