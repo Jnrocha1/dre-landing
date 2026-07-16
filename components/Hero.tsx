@@ -25,25 +25,36 @@ export default function Hero() {
       }} />
 
       {/* NOTEBOOK — no desktop é camada de fundo (absolute, deslocado à direita, sangrando
-          pra fora da viewport); no mobile é o notebook INTEIRO, sem nenhum corte, no maior
-          tamanho que cabe na largura da tela (100vw), centralizado — mesma lógica do
-          desktop, só sem o deslocamento pra fora da viewport. Depois de várias tentativas
-          de "notebook gigante + crop container com overflow:hidden" (que geraram uma série
-          de bugs só reproduzíveis no Safari iOS real: vh inconsistente, direção de
-          deslocamento errada), a decisão foi simplificar — sem crop container, sem
-          maxHeight, sem overflow tricks. width:100vw + marginLeft de breakout ignora o
-          padding da section, senão a largura ficaria presa ao content-box em vez da
-          viewport inteira. */}
+          pra fora da viewport); no mobile, o notebook é ampliado só HORIZONTALMENTE
+          (190vw), nunca cortamos a ALTURA (era isso que causava a tela do dashboard ser
+          cortada, incluindo um bug só reproduzível no Safari iOS real). A section já tem
+          overflowX:hidden, então o excesso lateral é cortado automaticamente.
+          CENTRALIZAÇÃO: não centralizamos a imagem do notebook inteira (seu centro
+          geométrico, 50% da largura) — centralizamos o CENTRO DA TELA do dashboard, que
+          fica em ~60,75% da largura da imagem (a tela vai de ~41,5% a ~80%, não é simétrica
+          em relação ao notebook inteiro por causa da perspectiva). Isso é feito em duas
+          etapas: 1) alignItems:"center" da <section> (herdado, não editado aqui) centraliza
+          o wrapper width:100vw normalmente — sem marginLeft de breakout, que conflitava com
+          essa centralização por flex (bug encontrado e corrigido nesta mudança: o
+          marginLeft:calc(50%-50vw) presumia layout de bloco normal, brigando com o
+          alignItems:center do flex pai e jogando o notebook ~48px pra esquerda do centro
+          real). 2) um translateX(-10.75%) fixo no notebook (wrapper estático separado do
+          motion.div, mesma técnica de sempre pra não colidir com o transform do
+          framer-motion) desloca a imagem de forma que o centro da TELA, não da imagem,
+          fique no centro da viewport. Com isso dá pra sangrar bem mais (190vw) mantendo
+          ~7% de margem simétrica dos dois lados da tela, em vez do limite mais apertado que
+          uma centralização ingênua permitiria. */}
       <div style={{
         position: isMobile ? "relative" : "absolute",
         top: isMobile ? undefined : "50%",
         right: isMobile ? undefined : "-9vw",
         transform: isMobile ? undefined : "translateY(-50%)",
         width: isMobile ? "100vw" : "80vw",
-        marginLeft: isMobile ? "calc(50% - 50vw)" : undefined,
         // reset global `* { max-width:100% }` (globals.css), que senão prende a
         // largura ao content-box do flex item e mata a sangria lateral no mobile.
         maxWidth: isMobile ? "none" : undefined,
+        display: isMobile ? "flex" : undefined,
+        justifyContent: isMobile ? "center" : undefined,
         marginTop: isMobile ? "0.5rem" : undefined,
         order: 2,
         zIndex: 1,
@@ -67,11 +78,27 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: isMobile ? 1.1 : 1.3, delay: isMobile ? 0.5 : 0.4, ease: [0.22,1,0.36,1] }}
           style={{
-            width: isMobile ? "100%" : undefined,
+            width: isMobile ? "190vw" : undefined,
             maxWidth: isMobile ? "none" : undefined,
+            flexShrink: isMobile ? 0 : undefined,
           }}
         >
-          <NotebookMockup />
+          {/* Wrapper estático separado do motion.div de propósito (mesma técnica de sempre:
+              framer-motion já usa `animate` pra gerar seu próprio transform, que colidiria
+              com um transform estático no mesmo elemento). translateX(-15%) desloca a
+              imagem pra que o CENTRO DA TELA (não o centro geométrico do notebook) fique
+              perto do centro da viewport — ver comentário grande acima do wrapper pai pra o
+              raciocínio geral. O valor -10.75% (média simples dos cantos tl/tr da tela) foi
+              tentado primeiro mas ainda cortava ~5-8px do canto tr (o mais à direita) nos
+              breakpoints de 390/414px — a interação entre o alignItems:"center" da section,
+              o width:190vw e este translateX não resulta numa centralização puramente
+              proporcional às porcentagens da imagem (testado e confirmado na prática, não
+              só em teoria). -15% foi calibrado medindo ao vivo (getBoundingClientRect dos 4
+              cantos da tela via SCREEN em NotebookMockup.tsx) até sobrar margem positiva e
+              saudável dos dois lados: ~42px/23px em 390px, ~41px/28px em 414px. */}
+          <div style={{ transform: isMobile ? "translateX(-15%)" : undefined }}>
+            <NotebookMockup />
+          </div>
         </motion.div>
       </div>
 
