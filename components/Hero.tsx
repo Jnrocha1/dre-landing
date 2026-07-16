@@ -83,17 +83,25 @@ export default function Hero() {
             flexShrink: isMobile ? 0 : undefined,
           }}
         >
-          {/* Alvo é a TELA do dashboard ficar CENTRALIZADA (margens esquerda/direita
-              iguais), não só "sem cortar" (margens positivas quaisquer). -15% garantia
-              margem positiva nos dois lados mas desigual (+42.5px esq. vs +23.3px dir. em
-              390px, quase o dobro) — parecia puxado pra esquerda no print. Recalibrado
-              medindo ao vivo (getBoundingClientRect dos 4 cantos SCREEN em
-              NotebookMockup.tsx, varrendo valores até L≈R): -16% equilibra os dois
-              breakpoints (390px: 35.2px/30.7px · 414px: 33.6px/36.3px — diferença ≤4.5px
-              nos dois, ambos bem positivos). Não dá pra zerar a diferença nos dois
-              breakpoints ao mesmo tempo com um valor fixo em %, mas -16% é o melhor
-              compromisso medido. */}
-          <div style={{ transform: isMobile ? "translateX(-16%)" : undefined }}>
+          {/* Alvo é a TELA do dashboard ficar CENTRALIZADA (margens esquerda/direita iguais).
+              HISTÓRICO: havia mesmo um problema real de medição — o motion.div acima (que
+              anima opacity/x/y no mount) fica com a animação congelada quando a aba/iframe
+              de teste não tem foco do SO (rAF pausado pelo browser), preso no estado
+              `initial`. O detalhe traiçoeiro é que esse `initial` é escolhido por isMobile
+              no momento do PRIMEIRO render — como isMobile começa false (useState) e só vira
+              true depois via useEffect, a animação pode congelar travada no valor de
+              DESKTOP (x:60), mesmo num viewport mobile, adicionando um offset horizontal
+              fantasma de +60px que contaminou tanto a tentativa -10.775% (derivada por
+              álgebra, sem esse problema) quanto as calibrações anteriores -15%/-16% (que
+              foram medidas ao vivo, mas sem essa correção — o offset fantasma cancelava por
+              coincidência a diferença real, fazendo -16% parecer certo quando não era).
+              Medição correta: forçar motionDiv para o estado `animate` estável
+              (opacity:1, transform:none) antes de medir, eliminando a dependência de foco/
+              rAF. Com isso, tanto a álgebra quanto a medição ao vivo convergem pro mesmo
+              valor: t = -8.15% dá margens iguais nos dois breakpoints testados (390px:
+              32.9px/32.9px · 414px: 35.0px/35.0px, medido via getBoundingClientRect nos 4
+              cantos SCREEN de NotebookMockup.tsx). */}
+          <div style={{ transform: isMobile ? "translateX(-8.15%)" : undefined }}>
             <NotebookMockup />
           </div>
         </motion.div>
