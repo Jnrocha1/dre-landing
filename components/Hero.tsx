@@ -78,9 +78,12 @@ export default function Hero() {
               mesmo elemento. A imagem do notebook tem uma margem vazia acima do objeto
               antes da tela começar — desloca pra cima pra pular essa margem, senão o
               maxHeight do crop corta a tela em vez do teclado. Ponto mais alto real da tela
-              é SCREEN.tr.y≈12.6% (NotebookMockup.tsx); usamos ~10% (2.6% de folga) pra
-              garantir que nem um pixel da tela seja cortado, mesmo com a margem de segurança. */}
-          <div style={{ transform: isMobile ? "translateY(-10%)" : undefined }}>
+              é SCREEN.tr.y≈12.6% (NotebookMockup.tsx). A primeira tentativa usou -10% (só
+              2,6% de folga — medido ao vivo em produção via devtools: sobravam ~13px de
+              margem antes do corte, insuficiente na prática, tela ainda cortava). Subindo
+              pra -20% dá ~7,4% de folga (~38px), com margem de sobra also no fundo (a base/
+              teclado ainda cabe tranquilamente dentro do maxHeight do crop). */}
+          <div style={{ transform: isMobile ? "translateY(-20%)" : undefined }}>
             <NotebookMockup />
           </div>
         </motion.div>
