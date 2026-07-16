@@ -25,11 +25,15 @@ export default function Hero() {
       }} />
 
       {/* NOTEBOOK — no desktop é camada de fundo (absolute, deslocado à direita, sangrando
-          pra fora da viewport); no mobile vira uma "janela" de altura limitada (maxHeight
-          em vh + overflow:hidden) com o notebook ampliado bem além dela — a tela (que ocupa
-          só os ~65% de cima da imagem) fica de fora do corte, e o que sobra (base/teclado)
-          é o que é cortado. width:100vw + marginLeft de breakout ignora o padding da
-          section, senão a sangria lateral ficaria presa ao content-box em vez da viewport. */}
+          pra fora da viewport); no mobile é o notebook INTEIRO, sem nenhum corte, no maior
+          tamanho que cabe na largura da tela (100vw), centralizado — mesma lógica do
+          desktop, só sem o deslocamento pra fora da viewport. Depois de várias tentativas
+          de "notebook gigante + crop container com overflow:hidden" (que geraram uma série
+          de bugs só reproduzíveis no Safari iOS real: vh inconsistente, direção de
+          deslocamento errada), a decisão foi simplificar — sem crop container, sem
+          maxHeight, sem overflow tricks. width:100vw + marginLeft de breakout ignora o
+          padding da section, senão a largura ficaria presa ao content-box em vez da
+          viewport inteira. */}
       <div style={{
         position: isMobile ? "relative" : "absolute",
         top: isMobile ? undefined : "50%",
@@ -40,19 +44,6 @@ export default function Hero() {
         // reset global `* { max-width:100% }` (globals.css), que senão prende a
         // largura ao content-box do flex item e mata a sangria lateral no mobile.
         maxWidth: isMobile ? "none" : undefined,
-        // "58vh" (não "58dvh") é a causa mais provável do corte só-no-iPhone-real: vh no
-        // Safari iOS é inconsistente por causa da barra de endereço que aparece/some,
-        // podendo calcular um maxHeight menor do que a viewport realmente visível no
-        // momento da carga, cortando o topo da tela do notebook. dvh resolve isso (mesma
-        // técnica que .hero-min-h já usa em globals.css, só que lá como classe CSS real
-        // com fallback; aqui é style inline do React, que não permite declarar a mesma
-        // propriedade duas vezes pra ter fallback — dvh sozinho já tem suporte amplo o
-        // suficiente (iOS 15.4+) pra não precisar de fallback pra vh.
-        maxHeight: isMobile ? "58dvh" : undefined,
-        overflow: isMobile ? "hidden" : undefined,
-        display: isMobile ? "flex" : undefined,
-        justifyContent: isMobile ? "center" : undefined,
-        alignItems: isMobile ? "flex-start" : undefined,
         marginTop: isMobile ? "0.5rem" : undefined,
         order: 2,
         zIndex: 1,
@@ -76,31 +67,11 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: isMobile ? 1.1 : 1.3, delay: isMobile ? 0.5 : 0.4, ease: [0.22,1,0.36,1] }}
           style={{
-            width: isMobile ? "230vw" : undefined,
+            width: isMobile ? "100%" : undefined,
             maxWidth: isMobile ? "none" : undefined,
-            flexShrink: isMobile ? 0 : undefined,
           }}
         >
-          {/* Wrapper estático separado do motion.div de propósito: framer-motion gera seu
-              próprio transform via `animate`, que colidiria com um transform estático no
-              mesmo elemento.
-              HISTÓRICO DO BUG (medido ao vivo em produção via devtools, não em teoria):
-              as duas tentativas anteriores (-10% e depois -20%) partiam da premissa errada
-              de que precisávamos "pular" a margem vazia acima do notebook deslocando a
-              imagem pra cima. Na prática é o CONTRÁRIO: com o container em
-              alignItems:"flex-start" e SEM nenhum deslocamento, o topo da imagem já alinha
-              exatamente com o topo da janela de corte, e a tela (que só começa em
-              SCREEN.tr.y≈12.6% da altura da imagem) fica confortavelmente dentro da janela,
-              com boa margem — foi medido ~64px de folga no topo num viewport de 390px.
-              Deslocar pra cima (translateY negativo) empurra a tela PRA FORA da janela por
-              cima, cortando-a — e quanto maior o deslocamento, pior o corte (por isso
-              -20% cortava mais que -10%, e o usuário via "igual ou pior"). A correção é não
-              deslocar nada: o alinhamento flex-start sozinho já resolve, cortando só uma
-              fatia pequena do fundo/teclado (o suficiente pra caber no maxHeight do
-              container), nunca a tela. */}
-          <div>
-            <NotebookMockup />
-          </div>
+          <NotebookMockup />
         </motion.div>
       </div>
 
