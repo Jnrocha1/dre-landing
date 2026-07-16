@@ -40,7 +40,15 @@ export default function Hero() {
         // reset global `* { max-width:100% }` (globals.css), que senão prende a
         // largura ao content-box do flex item e mata a sangria lateral no mobile.
         maxWidth: isMobile ? "none" : undefined,
-        maxHeight: isMobile ? "58vh" : undefined,
+        // "58vh" (não "58dvh") é a causa mais provável do corte só-no-iPhone-real: vh no
+        // Safari iOS é inconsistente por causa da barra de endereço que aparece/some,
+        // podendo calcular um maxHeight menor do que a viewport realmente visível no
+        // momento da carga, cortando o topo da tela do notebook. dvh resolve isso (mesma
+        // técnica que .hero-min-h já usa em globals.css, só que lá como classe CSS real
+        // com fallback; aqui é style inline do React, que não permite declarar a mesma
+        // propriedade duas vezes pra ter fallback — dvh sozinho já tem suporte amplo o
+        // suficiente (iOS 15.4+) pra não precisar de fallback pra vh.
+        maxHeight: isMobile ? "58dvh" : undefined,
         overflow: isMobile ? "hidden" : undefined,
         display: isMobile ? "flex" : undefined,
         justifyContent: isMobile ? "center" : undefined,
