@@ -83,20 +83,17 @@ export default function Hero() {
             flexShrink: isMobile ? 0 : undefined,
           }}
         >
-          {/* Wrapper estático separado do motion.div de propósito (mesma técnica de sempre:
-              framer-motion já usa `animate` pra gerar seu próprio transform, que colidiria
-              com um transform estático no mesmo elemento). translateX(-15%) desloca a
-              imagem pra que o CENTRO DA TELA (não o centro geométrico do notebook) fique
-              perto do centro da viewport — ver comentário grande acima do wrapper pai pra o
-              raciocínio geral. O valor -10.75% (média simples dos cantos tl/tr da tela) foi
-              tentado primeiro mas ainda cortava ~5-8px do canto tr (o mais à direita) nos
-              breakpoints de 390/414px — a interação entre o alignItems:"center" da section,
-              o width:190vw e este translateX não resulta numa centralização puramente
-              proporcional às porcentagens da imagem (testado e confirmado na prática, não
-              só em teoria). -15% foi calibrado medindo ao vivo (getBoundingClientRect dos 4
-              cantos da tela via SCREEN em NotebookMockup.tsx) até sobrar margem positiva e
-              saudável dos dois lados: ~42px/23px em 390px, ~41px/28px em 414px. */}
-          <div style={{ transform: isMobile ? "translateX(-15%)" : undefined }}>
+          {/* Alvo é a TELA do dashboard ficar CENTRALIZADA (margens esquerda/direita
+              iguais), não só "sem cortar" (margens positivas quaisquer). -15% garantia
+              margem positiva nos dois lados mas desigual (+42.5px esq. vs +23.3px dir. em
+              390px, quase o dobro) — parecia puxado pra esquerda no print. Recalibrado
+              medindo ao vivo (getBoundingClientRect dos 4 cantos SCREEN em
+              NotebookMockup.tsx, varrendo valores até L≈R): -16% equilibra os dois
+              breakpoints (390px: 35.2px/30.7px · 414px: 33.6px/36.3px — diferença ≤4.5px
+              nos dois, ambos bem positivos). Não dá pra zerar a diferença nos dois
+              breakpoints ao mesmo tempo com um valor fixo em %, mas -16% é o melhor
+              compromisso medido. */}
+          <div style={{ transform: isMobile ? "translateX(-16%)" : undefined }}>
             <NotebookMockup />
           </div>
         </motion.div>
