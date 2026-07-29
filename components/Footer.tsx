@@ -42,7 +42,10 @@ export default function Footer() {
 
       <div style={{ borderTop: "1px solid var(--bd)", paddingTop: "1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
         <div style={{ fontSize: 12, color: "var(--t3)" }}>© 2026 DRE Analytics · Todos os direitos reservados</div>
-        <div style={{ fontSize: 12, color: "var(--t3)" }}>Feito para contadores brasileiros</div>
+        <div style={{ display: "flex", gap: "1.25rem", alignItems: "center" }}>
+          <a href="https://dre-analytics-app.vercel.app/termos" style={{ fontSize: 12, color: "var(--t3)", textDecoration: "none" }}>Termos de Uso</a>
+          <a href="https://dre-analytics-app.vercel.app/privacidade" style={{ fontSize: 12, color: "var(--t3)", textDecoration: "none" }}>Privacidade</a>
+        </div>
       </div>
     </footer>
   )

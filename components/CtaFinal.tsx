@@ -15,7 +15,7 @@ export default function CtaFinal() {
         Seu próximo cliente vai perguntar como você faz tão rápido.
       </h2>
       <p style={{ fontSize: 16, color: "var(--t2)", marginBottom: "2.5rem" }}>
-        3 DREs gratuitas. Sem cartão. Sem configuração.
+        3 DREs grátis por 3 dias. Sem cartão. Sem configuração.
       </p>
       <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
         display: "inline-flex", alignItems: "center", gap: 8,
@@ -27,7 +27,7 @@ export default function CtaFinal() {
         Criar conta grátis →
       </a>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap", fontSize: 12, color: "var(--t3)", marginTop: "1.5rem" }}>
-        {["3 DREs gratuitas", "Sem cartão de crédito", "Cancele quando quiser"].map(t => (
+        {["3 DREs grátis por 3 dias", "Sem cartão de crédito", "Cancele quando quiser"].map(t => (
           <span key={t} style={{ display: "flex", alignItems: "center", gap: 5 }}>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             {t}

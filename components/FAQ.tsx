@@ -9,7 +9,7 @@ const ITEMS = [
   { q: "O cliente precisa ter acesso ao sistema?", a: "Não. O dashboard é do contador. Você apresenta para o cliente como quiser: compartilhando a tela, exportando PDF ou imprimindo. O cliente não precisa de login." },
   { q: "Quantas empresas posso cadastrar?", a: "Depende do plano. Trial: 1 empresa. Starter: até 5. Pro: até 15. Premium: até 30 com opção de adicionar mais." },
   { q: "Posso exportar os dados?", a: "Sim. O dashboard permite exportar em PDF os relatórios de análise. A funcionalidade de exportação de dados brutos (CSV) está disponível nos planos Pro e Premium." },
-  { q: "Como funciona o período trial?", a: "Você pode processar 3 DREs gratuitamente, sem cartão de crédito. Sem prazo, sem cobrança automática. Só começa a pagar se decidir assinar." },
+  { q: "Como funciona o período trial?", a: "Você tem 3 dias para processar até 3 DREs gratuitamente, sem cartão de crédito e sem cobrança automática. Só começa a pagar se decidir assinar um plano." },
   { q: "A IA pode errar na extração?", a: "O sistema foi treinado nos principais modelos de DRE brasileiros e tem uma precisão altíssima. Em casos onde o PDF tem formatação muito atípica, o sistema sinaliza para revisão manual." },
 ]
 

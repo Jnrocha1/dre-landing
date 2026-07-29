@@ -206,7 +206,7 @@ export default function Hero() {
               width: isMobile ? "100%" : undefined,
               textAlign: "center",
             }}>
-            Testar grátis: 3 DREs sem cartão
+            Testar grátis: 3 DREs em 3 dias
           </a>
           <a href="#como-funciona"
             style={{
@@ -232,7 +232,7 @@ export default function Hero() {
             marginBottom: isMobile ? "3rem" : 0,
           }}
         >
-          {["3 DREs gratuitas", "Sem cartão de crédito", "Cancele quando quiser"].map(t => (
+          {["3 DREs grátis por 3 dias", "Sem cartão de crédito", "Cancele quando quiser"].map(t => (
             <span key={t} style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               {t}

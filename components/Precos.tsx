@@ -5,8 +5,8 @@ import { Check, X } from "lucide-react"
 
 const PLANS = [
   {
-    name: "Trial", price: "Grátis", per: "3 DREs · sem cartão", popular: false,
-    feats: [["1 empresa", true],["3 DREs gratuitas", true],["Dashboard completo", true],["Consolidado/Comparativo", false],["Histórico ilimitado", false]],
+    name: "Trial", price: "Grátis", per: "3 DREs em 3 dias · sem cartão", popular: false,
+    feats: [["1 empresa", true],["3 DREs grátis por 3 dias", true],["Dashboard completo", true],["Consolidado/Comparativo", false],["Histórico ilimitado", false]],
   },
   {
     name: "Starter", price: "R$ 97", per: "/mês", popular: false,
