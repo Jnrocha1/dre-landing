@@ -17,7 +17,7 @@ export default function CtaFinal() {
       <p style={{ fontSize: 16, color: "var(--t2)", marginBottom: "2.5rem" }}>
         3 DREs grátis por 3 dias. Sem cartão. Sem configuração.
       </p>
-      <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
+      <a href="https://app.dreanalytics.com.br/cadastro" style={{
         display: "inline-flex", alignItems: "center", gap: 8,
         padding: "16px 36px", borderRadius: 8,
         background: "var(--blue)", color: "#fff",

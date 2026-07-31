@@ -197,7 +197,7 @@ export default function Hero() {
             width: isMobile ? "100%" : undefined,
           }}
         >
-          <a href="https://dre-analytics-app.vercel.app/cadastro"
+          <a href="https://app.dreanalytics.com.br/cadastro"
             style={{
               padding: "14px 32px", borderRadius: 8,
               background: "var(--blue)", color: "#fff",

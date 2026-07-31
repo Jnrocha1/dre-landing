@@ -61,7 +61,7 @@ export default function Precos() {
                 </div>
               ))}
             </div>
-            <a href="https://dre-analytics-app.vercel.app/cadastro" style={{
+            <a href="https://app.dreanalytics.com.br/cadastro" style={{
               padding: "11px", borderRadius: 7, textAlign: "center",
               fontSize: 13, fontWeight: 700, textDecoration: "none",
               background: p.popular ? "var(--blue)" : "var(--s3)",
