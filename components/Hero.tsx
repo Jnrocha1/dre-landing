@@ -57,7 +57,7 @@ export default function Hero() {
           amarra a cor de marca no elemento visual principal do hero, papel equivalente ao da
           foto saturada na referência */}
       {!isMobile && (
-        <div style={{
+        <div className="hero-glow-breathe" style={{
           position: "absolute", zIndex: 0,
           top: "50%", right: "2vw",
           width: "46vw", height: "62vh",
@@ -192,7 +192,12 @@ export default function Hero() {
               valor: t = -8.15% dá margens iguais nos dois breakpoints testados (390px:
               32.9px/32.9px · 414px: 35.0px/35.0px, medido via getBoundingClientRect nos 4
               cantos SCREEN de NotebookMockup.tsx). */}
-          <div style={{ transform: isMobile ? "translateX(-8.15%)" : undefined }}>
+          {/* Flutuação contínua só no desktop, aplicada aqui (não no motion.div pai, nem
+              junto do translateX mobile) — este div não tem nenhum transform estático no
+              desktop, então a animação CSS de transform não briga com nada. No mobile ele
+              já carrega o translateX(-8.15%) fixo da centralização, então não recebe a
+              classe (senão a keyframe substituiria esse translateX a cada frame). */}
+          <div className={isMobile ? undefined : "notebook-float"} style={{ transform: isMobile ? "translateX(-8.15%)" : undefined }}>
             <NotebookMockup />
           </div>
         </motion.div>
@@ -291,7 +296,7 @@ export default function Hero() {
             width: isMobile ? "100%" : undefined,
           }}
         >
-          <a href="https://app.dreanalytics.com.br/cadastro"
+          <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift"
             style={{
               padding: "14px 32px", borderRadius: 8,
               background: "var(--blue)", color: "#fff",
@@ -302,7 +307,7 @@ export default function Hero() {
             }}>
             Testar grátis: 3 DREs em 3 dias
           </a>
-          <a href="#como-funciona"
+          <a href="#como-funciona" className="btn-lift"
             style={{
               padding: "14px 24px", borderRadius: 8,
               background: "transparent", border: "1px solid var(--bd2)",

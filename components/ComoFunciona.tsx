@@ -22,12 +22,12 @@ export default function ComoFunciona() {
 
       <div ref={ref} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: isMobile ? "2rem" : "1px", background: isMobile ? "transparent" : "var(--bd)" }}>
         {STEPS.map((s, i) => (
-          <div key={s.n} style={{
+          <div key={s.n} className={isMobile ? undefined : "card-hover"} style={{
             padding: isMobile ? "0" : "2.5rem 2rem",
             background: isMobile ? "transparent" : "var(--s1)",
             opacity: vis ? 1 : 0,
             transform: vis ? "none" : "translateY(20px)",
-            transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s`,
+            transition: vis ? undefined : `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s`,
           }}>
             <div style={{ fontSize: "clamp(3rem,8vw,5rem)", fontWeight: 800, color: "rgba(37,99,235,0.12)", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: "1rem" }}>
               {s.n}

@@ -93,7 +93,7 @@ export default function Depoimentos() {
 
         {/* Controles */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button onClick={() => go(-1)} style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--s2)", border: "1px solid var(--bd2)", color: "var(--t2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <button onClick={() => go(-1)} className="icon-btn" style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--s2)", border: "1px solid var(--bd2)", color: "var(--t2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ChevronLeft size={16} />
           </button>
           <div style={{ display: "flex", gap: 6 }}>
@@ -101,7 +101,7 @@ export default function Depoimentos() {
               <button key={i} onClick={() => setIdx(i)} style={{ width: i === idx ? 20 : 6, height: 6, borderRadius: 3, background: i === idx ? "var(--blue)" : "var(--s3)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s ease" }} />
             ))}
           </div>
-          <button onClick={() => go(1)} style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--s2)", border: "1px solid var(--bd2)", color: "var(--t2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <button onClick={() => go(1)} className="icon-btn" style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--s2)", border: "1px solid var(--bd2)", color: "var(--t2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <ChevronRight size={16} />
           </button>
         </div>

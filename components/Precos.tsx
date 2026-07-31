@@ -36,14 +36,18 @@ export default function Precos() {
 
       <div ref={ref} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "1px", background: "var(--bd)", border: "1px solid var(--bd)", borderRadius: 12, overflow: "hidden" }}>
         {PLANS.map((p, i) => (
-          <div key={p.name} style={{
+          <div key={p.name} className="card-hover" style={{
             padding: "1.75rem",
             background: p.popular ? "var(--s2)" : "var(--s1)",
             display: "flex", flexDirection: "column",
             position: "relative",
             opacity: vis ? 1 : 0,
             transform: vis ? "none" : "translateY(16px)",
-            transition: `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`,
+            // Sem transição inline depois que a entrada já rodou (vis=true) — deixa a
+            // classe .card-hover (hover/press) assumir o transition desse ponto em diante.
+            // Combinar os dois no mesmo elemento via inline style bagunçava a transição
+            // de hover, já que inline sempre tem precedência sobre a classe.
+            transition: vis ? undefined : `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`,
           }}>
             {p.popular && (
               <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", background: "var(--blue)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 12px", borderRadius: "0 0 6px 6px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
@@ -61,7 +65,7 @@ export default function Precos() {
                 </div>
               ))}
             </div>
-            <a href="https://app.dreanalytics.com.br/cadastro" style={{
+            <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift" style={{
               padding: "11px", borderRadius: 7, textAlign: "center",
               fontSize: 13, fontWeight: 700, textDecoration: "none",
               background: p.popular ? "var(--blue)" : "var(--s3)",

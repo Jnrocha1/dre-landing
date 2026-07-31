@@ -45,10 +45,12 @@ export default function Nav() {
       {/* Direita */}
       <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 8 : 12, flexShrink: 0 }}>
         <a href="https://app.dreanalytics.com.br/login"
-          style={{ fontSize: 13, fontWeight: 500, color: "var(--t2)", textDecoration: "none", whiteSpace: "nowrap", display: isMobile ? "none" : "block" }}>
+          style={{ fontSize: 13, fontWeight: 500, color: "var(--t2)", textDecoration: "none", whiteSpace: "nowrap", display: isMobile ? "none" : "block", transition: "color 0.2s" }}
+          onMouseEnter={e => (e.currentTarget.style.color = "var(--t1)")}
+          onMouseLeave={e => (e.currentTarget.style.color = "var(--t2)")}>
           Entrar
         </a>
-        <a href="https://app.dreanalytics.com.br/cadastro"
+        <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift"
           style={{
             padding: isMobile ? "8px 14px" : "9px 20px",
             borderRadius: 7, background: "var(--blue)", color: "#fff",

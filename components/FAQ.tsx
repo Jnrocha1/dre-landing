@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 import { useInView } from "@/lib/use-in-view"
-import { Plus, Minus } from "lucide-react"
+import { Plus } from "lucide-react"
 
 const ITEMS = [
   { q: "Funciona com qualquer sistema contábil?", a: "Sim. O DRE Analytics processa qualquer PDF de DRE, independente do sistema que gerou: Domínio, Alterdata, Questor, Contabilizei ou qualquer outro. Se gera PDF, funciona." },
@@ -37,15 +37,24 @@ export default function FAQ() {
             <div key={i} style={{ borderTop: "1px solid var(--bd)" }}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
+                className="faq-row"
                 style={{
-                  width: "100%", padding: "1.25rem 0",
+                  width: "100%", padding: "1.25rem 0.5rem",
                   display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem",
                   background: "none", border: "none", cursor: "pointer",
-                  textAlign: "left",
+                  textAlign: "left", borderRadius: 6,
                 }}
               >
                 <span style={{ fontSize: 15, fontWeight: 500, color: "var(--t1)", lineHeight: 1.4 }}>{item.q}</span>
-                {open === i ? <Minus size={16} color="var(--t3)" style={{ flexShrink: 0 }} /> : <Plus size={16} color="var(--t3)" style={{ flexShrink: 0 }} />}
+                {/* Um ícone só, rotacionando 45° pra virar "x" em vez de trocar Plus<->Minus —
+                    a troca de componente não anima (é outro elemento do zero), a rotação sim. */}
+                <Plus
+                  size={16} color="var(--t3)" style={{
+                    flexShrink: 0,
+                    transform: open === i ? "rotate(45deg)" : "rotate(0deg)",
+                    transition: "transform 200ms cubic-bezier(0.23,1,0.32,1)",
+                  }}
+                />
               </button>
               <div style={{
                 overflow: "hidden",

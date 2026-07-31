@@ -110,11 +110,11 @@ export default function ProductShowcase() {
               { l: "EBITDA", v: "R$ 204.172", d: "▲ 31,7%", p: true },
               { l: "Score Saúde", v: "72 / 100", d: "Saudável", p: true },
             ].map((k, i) => (
-              <div key={k.l} style={{
+              <div key={k.l} className="card-hover" style={{
                 padding: "1rem 1.125rem", background: "var(--s1)",
                 opacity: kpiVis ? 1 : 0,
                 transform: kpiVis ? "none" : "translateY(12px)",
-                transition: `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`,
+                transition: kpiVis ? undefined : `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`,
               }}>
                 <div style={{ fontSize: 10, fontWeight: 600, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6 }}>{k.l}</div>
                 <div style={{ fontSize: 17, fontWeight: 700, color: "var(--t1)", letterSpacing: "-0.02em", marginBottom: 4, fontVariantNumeric: "tabular-nums" }}>{k.v}</div>

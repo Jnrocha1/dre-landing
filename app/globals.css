@@ -48,3 +48,69 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ---- Feedback de interação ----
+   Antes disso, praticamente nenhum elemento clicável do site reagia ao mouse (os estilos
+   eram todos objetos inline, que não suportam :hover). O scroll-reveal já existia em quase
+   toda seção, mas sem resposta a hover/clique a página inteira parecia estática — ninguém
+   sente "vida" numa página só porque o conteúdo apareceu uma vez ao rolar. Classes
+   utilitárias em vez de inline porque :hover/:active não dá pra fazer via style prop. */
+.btn-lift {
+  transition: transform 160ms cubic-bezier(0.23,1,0.32,1), box-shadow 200ms ease, filter 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-lift:hover { transform: translateY(-2px); filter: brightness(1.08); }
+}
+.btn-lift:active { transform: scale(0.97); }
+
+.card-hover {
+  transition: transform 220ms cubic-bezier(0.23,1,0.32,1), border-color 220ms ease, background-color 220ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover { transform: translateY(-4px); border-color: var(--bd2); }
+}
+
+.icon-btn {
+  transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .icon-btn:hover { background: var(--s3); border-color: var(--blue); color: var(--t1); }
+}
+.icon-btn:active { transform: scale(0.9); }
+
+.faq-row {
+  transition: background-color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq-row:hover { background: rgba(255,255,255,0.02); }
+}
+
+/* Respiração lenta e sutil no halo atrás do notebook do Hero — única animação contínua do
+   site (fora do marquee do TrustStrip), propositalmente discreta pra dar uma sensação de
+   "vivo" sem virar distração. */
+@keyframes hero-glow-breathe {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.82; transform: translateY(-50%) scale(1.05); }
+}
+.hero-glow-breathe {
+  animation: hero-glow-breathe 7s ease-in-out infinite;
+}
+
+/* Notebook do Hero flutuando bem devagar — animação contínua e sempre visível (não
+   depende de hover nem de rolar a página), pra ficar óbvio que a página "se mexe" mesmo
+   pra quem só olha, sem interagir. Fica num wrapper à parte do motion.div (que já usa
+   x/y do Framer Motion pra entrada) pra não brigar pela propriedade transform no mesmo
+   elemento. */
+@keyframes notebook-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.notebook-float {
+  animation: notebook-float 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-lift, .card-hover, .icon-btn, .faq-row { transition: none !important; }
+  .btn-lift:hover, .card-hover:hover, .icon-btn:hover, .btn-lift:active, .icon-btn:active { transform: none !important; }
+  .hero-glow-breathe, .notebook-float { animation: none !important; }
+}

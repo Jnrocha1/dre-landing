@@ -1,7 +1,29 @@
 "use client"
+import { useEffect, useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
 import { useInView } from "@/lib/use-in-view"
 import { BarChart3, Target, TrendingUp, AlertTriangle, FileText, Layers } from "lucide-react"
+
+// Conta de 0 até `target` quando `start` vira true — usado no card de Score de saúde
+// pra dar um sinal de vida bem óbvio (número + barra crescendo), sem depender de hover.
+function useCountUp(target: number, start: boolean, durationMs = 1100) {
+  const [value, setValue] = useState(0)
+  useEffect(() => {
+    if (!start) return
+    let raf: number
+    const t0 = performance.now()
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - t0) / durationMs)
+      // ease-out cúbico — começa rápido, desacelera perto do valor final
+      const eased = 1 - Math.pow(1 - p, 3)
+      setValue(Math.round(eased * target))
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [start, target, durationMs])
+  return value
+}
 
 const DESTAQUES = [
   { Icon: Target, titulo: "Score de saúde 0–100", desc: "6 critérios automáticos: CMV, resultado, margens, cobertura de juros, tendência e variação de receita.", badge: "Exclusivo" },
@@ -19,6 +41,7 @@ export default function Recursos() {
   const isMobile = useIsMobile()
   const { ref: destaquesRef, vis: destaquesVis } = useInView()
   const { ref: outrosRef, vis: outrosVis } = useInView()
+  const score = useCountUp(72, destaquesVis)
 
   return (
     <section id="recursos" style={{ padding: "100px var(--px)", background: "var(--ink)", borderTop: "1px solid var(--bd)" }}>
@@ -31,14 +54,14 @@ export default function Recursos() {
       {/* Destaques — os 2 diferenciais reais, com mais peso visual e um pedaço de UI real */}
       <div ref={destaquesRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? "1.25rem" : "1.5rem", marginBottom: "1.5rem" }}>
         {DESTAQUES.map((f, i) => (
-          <div key={f.titulo} style={{
+          <div key={f.titulo} className="card-hover" style={{
             padding: "2.25rem",
             background: "var(--s1)",
             border: "1px solid var(--bd2)",
             borderRadius: 16,
             opacity: destaquesVis ? 1 : 0,
             transform: destaquesVis ? "none" : "translateY(18px)",
-            transition: `opacity 0.55s ease ${i * 0.1}s, transform 0.55s ease ${i * 0.1}s`,
+            transition: destaquesVis ? undefined : `opacity 0.55s ease ${i * 0.1}s, transform 0.55s ease ${i * 0.1}s`,
           }}>
             <f.Icon size={26} color="var(--blue)" strokeWidth={1.5} style={{ marginBottom: "1.25rem" }} />
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: "0.75rem" }}>
@@ -51,10 +74,10 @@ export default function Recursos() {
               <div style={{ padding: "1rem 1.125rem", background: "var(--s2)", borderRadius: 10 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                   <span style={{ fontSize: 11, fontWeight: 600, color: "var(--t3)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Score de saúde</span>
-                  <span style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", fontVariantNumeric: "tabular-nums" }}>72 / 100</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: "var(--t1)", fontVariantNumeric: "tabular-nums" }}>{score} / 100</span>
                 </div>
                 <div style={{ height: 6, borderRadius: 3, background: "var(--s3)", overflow: "hidden" }}>
-                  <div style={{ width: "72%", height: "100%", background: "var(--green)", borderRadius: 3 }} />
+                  <div style={{ width: `${score}%`, height: "100%", background: "var(--green)", borderRadius: 3, transition: "width 80ms linear" }} />
                 </div>
                 <div style={{ fontSize: 11, color: "var(--green)", marginTop: 6 }}>Saudável</div>
               </div>
@@ -73,12 +96,12 @@ export default function Recursos() {
       {/* Outros recursos — grid mais compacto, peso visual menor de propósito */}
       <div ref={outrosRef} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "1px", background: "var(--bd)" }}>
         {OUTROS.map((f, i) => (
-          <div key={f.titulo} style={{
+          <div key={f.titulo} className="card-hover" style={{
             padding: "1.5rem",
             background: "var(--ink)",
             opacity: outrosVis ? 1 : 0,
             transform: outrosVis ? "none" : "translateY(14px)",
-            transition: `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`,
+            transition: outrosVis ? undefined : `opacity 0.5s ease ${i * 0.07}s, transform 0.5s ease ${i * 0.07}s`,
           }}>
             <f.Icon size={17} color="var(--blue)" strokeWidth={1.5} style={{ marginBottom: "0.85rem" }} />
             <div style={{ fontSize: 13, fontWeight: 600, color: "var(--t1)", letterSpacing: "-0.01em", marginBottom: "0.4rem" }}>{f.titulo}</div>
