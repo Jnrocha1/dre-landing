@@ -18,7 +18,11 @@
   --bd:     rgba(230,232,237,0.08);
   --bd2:    rgba(230,232,237,0.14);
   --nav:    64px;
-  --px:     max(1.5rem, calc((100vw - 1160px)/2));
+  /* 1160px -> 1320px: reduz a margem lateral em telas largas (Nav, Hero e demais seções
+     ficavam com respiro grande demais nas bordas comparado à referência de design —
+     abaixo de ~1360px de viewport o clamp já protege com o mínimo de 1.5rem, então
+     mobile/tablet não mudam nada). */
+  --px:     max(1.5rem, calc((100vw - 1320px)/2));
   --font-display: 'Bitter', Georgia, serif;
 }
 
