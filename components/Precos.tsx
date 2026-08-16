@@ -2,22 +2,24 @@
 import { useIsMobile } from "@/lib/use-is-mobile"
 import { useInView } from "@/lib/use-in-view"
 import { Check, X } from "lucide-react"
+import { trackEvent, generateEventId } from "@/lib/meta-pixel"
+import { withPlano } from "@/lib/attribution"
 
 const PLANS = [
   {
-    name: "Trial", price: "Grátis", per: "3 DREs em 3 dias · sem cartão", popular: false,
+    id: "trial", name: "Trial", price: "Grátis", priceNum: 0, per: "3 DREs em 3 dias · sem cartão", popular: false,
     feats: [["1 empresa", true],["3 DREs grátis por 3 dias", true],["Dashboard completo", true],["Consolidado/Comparativo", false],["Histórico ilimitado", false]],
   },
   {
-    name: "Starter", price: "R$ 97", per: "/mês", popular: false,
+    id: "starter", name: "Starter", price: "R$ 97", priceNum: 97, per: "/mês", popular: false,
     feats: [["Até 5 empresas", true],["DREs ilimitadas", true],["2 anos de histórico", true],["Consolidado/Comparativo", false],["Suporte prioritário", false]],
   },
   {
-    name: "Pro", price: "R$ 197", per: "/mês", popular: true,
+    id: "pro", name: "Pro", price: "R$ 197", priceNum: 197, per: "/mês", popular: true,
     feats: [["Até 15 empresas", true],["DREs ilimitadas", true],["5 anos de histórico", true],["Consolidado de grupos", true],["Comparativo entre empresas", true]],
   },
   {
-    name: "Premium", price: "R$ 297", per: "/mês", popular: false,
+    id: "premium", name: "Premium", price: "R$ 297", priceNum: 297, per: "/mês", popular: false,
     feats: [["Até 30 empresas", true],["Histórico ilimitado", true],["Tudo do plano Pro", true],["Suporte prioritário", true],["+R$9/empresa adicional", true]],
   },
 ]
@@ -65,7 +67,21 @@ export default function Precos() {
                 </div>
               ))}
             </div>
-            <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift" style={{
+            <a
+              href={p.id === "trial" ? "https://app.dreanalytics.com.br/cadastro" : withPlano("https://app.dreanalytics.com.br/cadastro", p.id)}
+              className="btn-lift"
+              onClick={() => {
+                if (p.id === "trial") {
+                  trackEvent('Lead', undefined, generateEventId())
+                } else {
+                  // InitiateCheckout: intenção de compra de um plano específico já na landing —
+                  // o cadastro em si (CompleteRegistration) e a compra confirmada (Purchase) são
+                  // disparados depois, do lado do app (que sabe de verdade se a conta foi criada
+                  // e se o pagamento foi confirmado pela Stripe).
+                  trackEvent('InitiateCheckout', { value: p.priceNum, currency: 'BRL', content_name: p.name }, generateEventId())
+                }
+              }}
+              style={{
               padding: "11px", borderRadius: 7, textAlign: "center",
               fontSize: 13, fontWeight: 700, textDecoration: "none",
               background: p.popular ? "var(--blue)" : "var(--s3)",

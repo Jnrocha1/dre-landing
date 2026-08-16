@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useIsMobile } from "@/lib/use-is-mobile"
+import { trackEvent, generateEventId } from "@/lib/meta-pixel"
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -51,6 +52,7 @@ export default function Nav() {
           Entrar
         </a>
         <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift"
+          onClick={() => trackEvent('Lead', undefined, generateEventId())}
           style={{
             padding: isMobile ? "8px 14px" : "9px 20px",
             borderRadius: 7, background: "var(--blue)", color: "#fff",

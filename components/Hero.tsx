@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { useIsMobile } from "@/lib/use-is-mobile"
 import NotebookMockup from "@/components/NotebookMockup"
+import { trackEvent, generateEventId } from "@/lib/meta-pixel"
 
 export default function Hero() {
   const isMobile = useIsMobile()
@@ -297,6 +298,7 @@ export default function Hero() {
           }}
         >
           <a href="https://app.dreanalytics.com.br/cadastro" className="btn-lift"
+            onClick={() => trackEvent('Lead', undefined, generateEventId())}
             style={{
               padding: "14px 32px", borderRadius: 8,
               background: "var(--blue)", color: "#fff",
