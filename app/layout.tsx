@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { MetaPixel } from "@/components/MetaPixel"
 import { AttributionCapture } from "@/components/AttributionCapture"
+import { VisitTracker } from "@/components/VisitTracker"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <MetaPixel />
         <AttributionCapture />
+        <VisitTracker />
         {children}
         <Analytics />
       </body>
