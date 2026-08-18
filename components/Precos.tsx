@@ -84,9 +84,13 @@ export default function Precos() {
               style={{
               padding: "11px", borderRadius: 7, textAlign: "center",
               fontSize: 13, fontWeight: 700, textDecoration: "none",
+              // Antes o botão secundário (Starter/Premium) usava --t2/--bd2, que rendia quase
+              // sem contraste contra o fundo do card (#1F2736 sobre #111620/#181E2A) — lia como
+              // desabilitado mesmo sendo 100% clicável. Texto em --t1 (quase branco) + borda mais
+              // visível deixa claro que é um botão ativo, só com menos ênfase que o "Mais popular".
               background: p.popular ? "var(--blue)" : "var(--s3)",
-              color: p.popular ? "#fff" : "var(--t2)",
-              border: p.popular ? "none" : "1px solid var(--bd2)",
+              color: p.popular ? "#fff" : "var(--t1)",
+              border: p.popular ? "none" : "1px solid rgba(230,232,237,0.3)",
             }}>
               {p.name === "Trial" ? "Começar grátis" : `Assinar ${p.name}`}
             </a>
